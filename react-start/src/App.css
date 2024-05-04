@@ -1,0 +1,74 @@
+.reg{
+  position:relative;
+  text-align: center;
+  background-color: #F9F6F6;
+  border-radius: 60px;
+  top: 234px;
+  padding-bottom: 320px;
+  margin-left: 65px;
+  margin-right: 65px;
+  margin-bottom: 159px;
+
+}
+.textquiz{
+  position: relative;
+  padding:0%;
+  margin: 0%;
+  top:138px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 34.75px;
+  font-family: 'Zen Maru Gothic';
+}
+.login{
+  text-align: center;
+  position: relative;
+  border-radius: 60px;
+  border:3px solid black;
+  width: 230px;
+  height: 40px;
+  background: #D0D0D0;
+  top:265px;
+
+
+}
+.quiz{
+  background-color: rgb(0, 255, 221);
+  margin: 200px;
+  padding:15px;
+  margin-right:400px;
+  margin-left:400px;
+  border-radius: 40px;
+  position: relative;
+  top:100px;
+
+}
+.questions{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  border-bottom:1px solid black;
+  padding-bottom: 30px;
+}
+.button{
+  position: relative;
+  background: linear-gradient(180deg, #E73BCC 0%, #342181 100%);
+  border-radius: 60px;
+  top: 300px;
+  width: 153px;
+  height: 80px;
+  border: 1px solid #000000;
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 24px;
+  font-family: "Yellowtail";
+}
+.quest{
+  position: relative;
+  top:270px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 34.75%;
+  font-family: 'Zen Maru Gothic';
+  padding: 0%;
+}
+
