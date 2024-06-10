@@ -1,11 +1,8 @@
-import { Questions } from "./Questions"
 
 export function Registration(){
-
     return(
         <div className="reg">
             <div className="avatar" >
-                <img src="C:\Users\никита\Desktop\pro\react-start\src\avatar.png" alt="аватарка"/>
             </div>
             <div className="namequiz">
                 <p className="textquiz">название</p>
@@ -13,7 +10,10 @@ export function Registration(){
             <div className="person">
                 <p className="quest">Как вас зовут?</p>
                 <input className="login" type="text" placeholder="имя пользователя"></input><br />
-                <button className="button" onClick={()=>"index1.js"} >Начать!</button>
+                    <div>
+                        <button className="button">Начать!</button>
+                    </div>
+
             </div>
         </div>
 
@@ -21,12 +21,7 @@ export function Registration(){
 };
 
 
-function Quest(){
-    return(
-    <Questions/>
-)
-    
-};
+
 
 
 
