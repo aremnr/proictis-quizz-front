@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'ZenMaruGothic';
+  src: url('./fonts/ZenMaruGothic-Black.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Bold.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Light.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Medium.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'zen dots';
+  src: url(./fonts/ZenDots-Regular.ttf);
+}
+
+body {
+  background-image: url('/public/background2.png');
+}
+
+body {
+  
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+

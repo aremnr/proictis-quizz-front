@@ -1,0 +1,144 @@
+html, body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+   font-family: Arial, sans-serif;
+ }
+body {
+   background-image: url('/public/background2.png'); 
+   background-size: cover;  
+   background-position: center;
+   justify-content: center;
+   align-items: center;
+   background-size: cover;
+}
+
+.outer-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background-size: cover; 
+   background-position: center; 
+ }
+
+.inner-container {
+   padding: 20px;
+   background-color: #ffffff;
+   border-radius: 70px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+   max-width: 260px; 
+   width: 100%;
+   height: 510px;
+   text-align: center;
+ }
+
+
+.image-stack {
+   position: relative;
+   width: 100%;
+   height: auto;
+   margin-bottom: 20px; 
+ }
+ 
+
+ .image-stack img {
+   max-width: 100%; 
+   height: auto;
+   object-fit: contain;
+ }
+ 
+
+ .image1 {
+   position: absolute;
+   top: -140px;
+   left: 3px;
+   width: 255px;
+   z-index: 1;
+   opacity: 1;
+   
+ }
+ 
+ .image2 {
+   position: absolute;
+   top: -110px;
+   left: 30px;
+   width: 200px; 
+   z-index: 2; 
+   opacity: 1;
+ }
+ 
+ .image3 {
+   position: absolute;
+   top: -130px;
+   left: 50%;
+   width: 400px; 
+   height: auto;
+   transform: translateX(-50%);
+   z-index: 3; 
+   opacity: 1;
+ }
+
+ 
+.content {
+   position: relative;
+   z-index: 4; 
+   margin-top: 155px;
+ }
+
+.title {
+   font-size: 22px;
+   font-family:Arial, Helvetica, sans-serif;
+   font-weight: 100;
+ }
+ 
+ .question1 {
+   font-size: 24px;
+   margin-top: 125px;
+   font-family: 'ZenMaruGothic';
+   font-weight: 400;
+ }
+ 
+
+ 
+ .action-button:hover {
+   background-color: #0056b3;
+ }
+
+ .buttonstart {
+   margin: 0 auto;
+   background: linear-gradient(#E73BCC, #342181);
+   text-align: center; 
+   border-radius: 45px; 
+   
+   width: 150px;
+   height: 85px; 
+   margin-top: 25px;
+   color: white;
+   border: none;
+   font-size: 24px; 
+   cursor: pointer;
+
+   
+}
+
+.center{
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+}
+
+.oval-input {
+   margin-top: -30px;
+   width: 85%; 
+   max-width: 300px;
+   padding: 15px; 
+   border: 3px solid black; 
+   border-radius: 50px; 
+   background-color: #d2d2d2; 
+   box-sizing: border-box; 
+   font-size: 16px; 
+   text-align: center;
+}
+
