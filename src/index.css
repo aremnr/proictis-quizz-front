@@ -6,9 +6,13 @@
        url('./fonts/ZenMaruGothic-Medium.ttf') format('truetype'),
        url('./fonts/ZenMaruGothic-Regular.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'zen dots';
+  src: url(./fonts/ZenDots-Regular.ttf);
+}
 
 body {
-  background-image: url('/public/background.png');
+  background-image: url('/public/background2.png');
 }
 
 body {
@@ -24,4 +28,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
 

@@ -1,5 +1,9 @@
 import React from 'react';
 import './homestyles.css';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { purple } from '@mui/material/colors';
 
 export function Home(){
    return (
@@ -24,7 +28,6 @@ export function Home(){
           />
         
         </div>
-          
           <button className="buttonstart">Начать!</button>
          </div>
          </div>

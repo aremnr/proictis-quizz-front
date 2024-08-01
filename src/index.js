@@ -4,24 +4,19 @@ import './index.css';
 import App from './App';
 import './App.css';
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
-import { Questions } from './componets/Questions';
-import { QuestionsWrite } from './componets/QuestionsWrite';
-import {Registration} from './componets/Quiz';
-import {Home} from './componets/Home/Home1';
-
+import {Home} from './componets/Home/Home';
+import {Question} from './componets/Question/question'
+import {Questions} from './componets/Question/Questions'
+import {Answer} from './componets/Answer/Answer'
 const router = createBrowserRouter([
   {
     path:'/question/:id',
-    element:<Questions/>,
+    element:<Question/>,
     
   },
   {
     path:'/app',
     element:<App/>
-  },
-  {
-    path:'/registration',
-    element: <Registration/>
   },
   {
     path:'/home',
@@ -31,6 +26,15 @@ const router = createBrowserRouter([
     path: '/',
     element: <Navigate to='/home' replace />
   },
+  {
+    path: '/questions/:id',
+    element: <Questions/>
+  },
+  {
+    path: '/answer',
+    element: <Answer/>
+  }
+
 ])
 
 
