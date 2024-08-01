@@ -1,0 +1,27 @@
+.timerWrppaer {
+  width: 100%;
+  position: relative;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 60px;
+}
+
+.bar {
+  background: linear-gradient(120deg,#FF00C7, #5B00CE);
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'ZenMaruGothic';
+  font-weight: 400;
+  font-size: larger;
+}

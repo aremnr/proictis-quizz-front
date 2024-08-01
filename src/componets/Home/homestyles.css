@@ -107,20 +107,18 @@ body {
  }
 
  .buttonstart {
-   margin: 0 auto;
+   margin: 25px auto 0;
    background: linear-gradient(#E73BCC, #342181);
    text-align: center; 
    border-radius: 45px; 
-   
    width: 150px;
    height: 85px; 
-   margin-top: 25px;
    color: white;
    border: none;
-   font-size: 24px; 
+   font-family: 'ZenMaruGothic';
+   font-weight: 400;
+   font-size: 24px;
    cursor: pointer;
-
-   
 }
 
 .center{

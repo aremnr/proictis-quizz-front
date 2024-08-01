@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { StyledEngineProvider } from '@mui/material/styles';
 import './index.css';
 import App from './App';
 import './App.css';
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/app',
-    element:<App/>
+    element:<App />
   },
   {
     path:'/home',
@@ -41,7 +42,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <StyledEngineProvider injectFirst>
+      <RouterProvider router={router}/>
+    </StyledEngineProvider>
   </React.StrictMode>
 );
 
