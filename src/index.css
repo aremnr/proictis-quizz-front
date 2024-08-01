@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'ZenMaruGothic';
+  src: url('./fonts/ZenMaruGothic-Black.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Bold.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Light.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Medium.ttf') format('truetype'),
+       url('./fonts/ZenMaruGothic-Regular.ttf') format('truetype');
+}
+
 body {
   background-image: url('/public/background.png');
 }
@@ -15,3 +24,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
