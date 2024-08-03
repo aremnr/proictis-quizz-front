@@ -1,9 +1,10 @@
 .timerWrppaer {
   width: 100%;
   position: relative;
-  height: 25px;
+  height: 29px;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .progress {

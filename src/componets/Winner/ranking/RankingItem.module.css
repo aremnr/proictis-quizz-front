@@ -1,0 +1,18 @@
+/* src/RankingItem.css */
+.rankingitem {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .rankingimage {
+   width: 50px; /* Ширина картинки, измените по своему усмотрению */
+   height: 50px; /* Высота картинки, измените по своему усмотрению */
+   margin-right: 10px; /* Расстояние между картинкой и текстом */
+ }
+ 
+ .rankingtext {
+   font-size: 25px;
+ }
+ .bold {
+   font-weight: bold;
+ }

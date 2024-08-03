@@ -1,26 +1,32 @@
 import React from 'react';
 
 import { Timer } from '../Timer/Timer';
-
-import './questionstyle.css';
+import Button from '@mui/material/Button';
+import styles from './questionstyle.module.css';
 
 export function Question () {
     return(
         <div>
-            <div className='outer-container2'>
-                <div className='inner-container2'>
-                    <div className='elements'>
-                        <p className='question'>Кто проживает на дне океана?</p>
-                    <div className='questPhoto'>
-                        <img className="photo" src="/gubka.jpg" alt="Gubka" />
+            <div className={styles.outerContainer}>
+                <div className={styles.innerContainer}>
+                    <div className={styles.elements}>
+                        <p className={styles.question}>Кто проживает на дне океана?</p>
+                    <div className={styles.questPhoto}>
+                        <img className={styles.photo} src="/gubka.jpg" alt="Gubka" />
                     </div>
-                    <Timer seconds={60} />
-                    <div className='answers'>
-                        <input className="inputText" type="text" placeholder="ваш ответ" />
+                    <div className={styles.timerpadding}><Timer seconds={60} /></div>
+                    <div className={styles.answers}>
+                        <input className={styles.inputText} type="text" placeholder="ваш ответ" />
                     </div>
-                    <div className='button1'>
-                        <button className="toAnswer">ответить</button>
+                    <div className={styles.button1}>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        className={styles.toAnswer}>
+                            ответить
+                    </Button>
                     </div>
+
                     </div>
                 </div>
             </div>

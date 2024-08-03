@@ -9,6 +9,9 @@ import {Home} from './componets/Home/Home';
 import {Question} from './componets/Question/question'
 import {Questions} from './componets/Question/Questions'
 import {Answer} from './componets/Answer/Answer'
+import {Wait} from './componets/WaitArea/wait'
+import {Winner} from './componets/Winner/winner'
+
 const router = createBrowserRouter([
   {
     path:'/question/:id',
@@ -34,8 +37,15 @@ const router = createBrowserRouter([
   {
     path: '/answer',
     element: <Answer/>
-  }
-
+  },
+  {
+    path: '/wait',
+    element: <Wait/>
+  },
+  {
+    path: '/winner',
+    element: <Winner/>
+  },
 ])
 
 
