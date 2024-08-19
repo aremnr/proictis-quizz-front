@@ -30,6 +30,13 @@
   src: url(./fonts/ZenDots-Regular.ttf);
 }
 
+html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
 body {
   
   margin: 0;
@@ -38,6 +45,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-size: cover;  
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  
+  
+
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

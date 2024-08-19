@@ -1,4 +1,4 @@
-.timerWrppaer {
+.timerWrapper {
   width: 100%;
   position: relative;
   height: 29px;
@@ -13,7 +13,9 @@
 }
 
 .bar {
-  background: linear-gradient(120deg,#FF00C7, #5B00CE);
+  background: linear-gradient(120deg, #FF00C7, #5B00CE);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
 }
 
 .label {
@@ -25,4 +27,32 @@
   font-family: 'ZenMaruGothic';
   font-weight: 400;
   font-size: larger;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

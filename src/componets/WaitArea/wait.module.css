@@ -1,18 +1,23 @@
-body {
+.bgimage{
    background-image: url('/public/question.png');
-   background-size: cover;  
-   background-position: center;
-   justify-content: center;
-   align-items: center;
-   background-size: cover;
    display: flex;
-   align-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; /* 90% ширины родительского элемента */
+  height: 100vh; /* 90% высоты окна просмотра */
+  margin: 0 auto; /* Центрирование контейнера по горизонтали */
+  padding: 10px; /* Внутренние отступы */
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+ 
  }
 
  .elements{
    position: relative;
    text-align:center;
    padding-bottom: 140px;
+   
  }
 
 .text{

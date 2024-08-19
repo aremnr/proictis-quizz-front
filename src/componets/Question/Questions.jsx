@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './questionstyle.module.css';
 import { Timer } from '../Timer/Timer';
 import Button from '@mui/material/Button';
+import mockQuestions from '../../mocks/mocks';
+import { useParams } from 'react-router-dom';
 
 //  export function Questions(){
 //     return(
@@ -34,28 +36,39 @@ import Button from '@mui/material/Button';
 // };
 
 export function Questions(){
+    const { id } = useParams();
+    const questionIndex = parseInt(id, 10) - 1; // Преобразуем ID в индекс массива
+    const currentQuestion = mockQuestions[questionIndex];
+
+    if (!currentQuestion) {
+        return <p>Вопрос не найден.</p>;
+    }
     return(
         <div>
-            <div className={styles.outerContainer}>
-                <div className={styles.innerContainer}>
-                    <div className={styles.elements}>
-                        <p className={styles.question}>Кто проживает на дне океана?</p>
-                    <div className={styles.questPhoto}>
-                        <img className={styles.photo} src="/gubka.jpg" alt="Gubka" />
+            <div className={styles.bgimage}>
+                <div className={styles.outerContainer}>
+                    <div className={styles.innerContainer}>
+                        <div className={styles.elements}>
+                            <p className={styles.question}>{currentQuestion.question}</p>
+                            <div className={styles.questPhoto}>
+                                <img className={styles.photo} src="/gubka.jpg" alt="Gubka" />
+                            </div>
+                            <div className={styles.timerpadding1}><Timer seconds={60} /></div>
+                            <div className={styles.answers}>
+                            {currentQuestion.answers.map((answer, index) => (
+                                    <button key={index} className={styles.answer}>
+                                        {answer}
+                                    </button>
+                                ))}
+                            </div>
+                            
                     </div>
-                    <div className={styles.timerpadding}><Timer seconds={60} /></div>
-                    <div className={styles.answers}>
-                        <button className={styles.answer}>Спанч Боб</button>
-                        <button className={styles.answer}>Хлебная жаба</button>
-                        <button className={styles.answer}>Что?</button>
-                        <button className={styles.answer}>Улитка</button>
-                    </div>
-                    <div className={styles.avatarPerson}>
-                        <img className={styles.ava} src="/ava2.png" alt="avatar" />
-                        <img className={styles.ava} src="/ava3.png" alt="avatar" />
-                        <img className={styles.ava} src="/ava.png" alt="avatar" />
-                        <img className={styles.ava} src="/ava5.png" alt="avatar" />
-                        <img className={styles.ava} src="/ava4.png" alt="avatar" />
+                    <div className={styles.avatarperson}>
+                                <img className={styles.ava} src="/ava2.png" alt="avatar" />
+                                <img className={styles.ava} src="/ava3.png" alt="avatar" />
+                                <img className={styles.ava} src="/ava.png" alt="avatar" />
+                                <img className={styles.ava} src="/ava5.png" alt="avatar" />
+                                <img className={styles.ava} src="/ava4.png" alt="avatar" />
                     </div>
                     </div>
                 </div>

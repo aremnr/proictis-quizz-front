@@ -6,6 +6,7 @@ import RankingItem from './ranking/RankingItem';
 export function Winner(){
    return(
       <div>
+         <div className={styles.bgimage}>
          <div className={styles.outerContainer}>
                 <div className={styles.innerContainer}>
                     <div className={styles.elements}>
@@ -29,6 +30,7 @@ export function Winner(){
                         className={styles.results}> Итоги</Button>
                      </div>
                 </div>
+            </div>
             </div>
       </div>
    );

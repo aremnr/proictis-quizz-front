@@ -1,21 +1,20 @@
-body {
+.bgimage{
   background-image: url('/public/question.png');
-  background-size: cover;  
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
+
 }
 
+
 .outerContainer {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 100vh;
-   background-size: cover; 
-   background-position: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw; /* 90% ширины родительского элемента */
+  height: 100vh; /* 90% высоты окна просмотра */
+  margin: 0 auto; /* Центрирование контейнера по горизонтали */
+  padding: 10px; /* Внутренние отступы */
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
  }
 
 .innerContainer {

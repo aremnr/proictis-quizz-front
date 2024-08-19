@@ -1,11 +1,5 @@
-html, body {
-   margin: 0;
-   padding: 0;
-   height: 100%;
-   width: 100%;
-   font-family: Arial, sans-serif;
- }
-body {
+
+.bgimage {
    background-image: url('/public/background2.png'); 
    background-size: cover;  
    background-position: center;
@@ -14,7 +8,7 @@ body {
    background-size: cover;
 }
 
-.outer-container {
+.outercontainer {
    display: flex;
    justify-content: center;
    align-items: center;
@@ -23,7 +17,7 @@ body {
    background-position: center; 
  }
 
-.inner-container {
+.innercontainer {
    padding: 20px;
    background-color: #ffffff;
    border-radius: 70px;
@@ -35,7 +29,7 @@ body {
  }
 
 
-.image-stack {
+.imagestack {
    position: relative;
    width: 100%;
    height: auto;
@@ -43,7 +37,7 @@ body {
  }
  
 
- .image-stack img {
+ .imagestack img {
    max-width: 100%; 
    height: auto;
    object-fit: contain;
@@ -62,9 +56,9 @@ body {
  
  .image2 {
    position: absolute;
-   top: -110px;
-   left: 30px;
-   width: 200px; 
+   top: -117px;
+   left: 23px;
+   width: 215px; 
    z-index: 2; 
    opacity: 1;
  }
@@ -106,10 +100,21 @@ body {
    background-color: #0056b3;
  }
 
+ @keyframes gradientAnimation {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
 
  .buttonstart {
    margin: 25px auto 0;
-   background: linear-gradient(#E73BCC, #342181);
+   background: linear-gradient(60deg, #E73BCC, #342181);
    text-align: center; 
    border-radius: 45px; 
    width: 150px;
@@ -120,6 +125,8 @@ body {
    font-weight: 400;
    font-size: 24px;
    cursor: pointer;
+  animation: gradientAnimation 2.3s ease infinite;
+  background-size: 200% 200%;
 }
 
 .center{
@@ -128,7 +135,7 @@ body {
    align-items: center;
 }
 
-.oval-input {
+.ovalinput {
    margin-top: -30px;
    width: 85%; 
    max-width: 300px;
