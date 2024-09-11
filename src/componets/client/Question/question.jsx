@@ -1,5 +1,5 @@
 import React from 'react';
-import { Timer } from '../Timer/Timer';
+import { Timer } from '../Timer/timer1/Timer';
 import Button from '@mui/material/Button';
 import styles from './questionstyle.module.css';
 import mockQuestions from '../../mocks/mocks';

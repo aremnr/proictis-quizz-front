@@ -1,0 +1,316 @@
+
+.reg{
+   position:relative;
+   text-align: center;
+   background-color: #F9F6F6;
+   border-radius: 60px;
+   top: 234px;
+   padding-bottom: 320px;
+   margin-left: 65px;
+   margin-right: 65px;
+   margin-bottom: 159px;
+ 
+ }
+ .textquiz{
+   position: relative;
+   padding:0%;
+   margin: 0%;
+   top:138px;
+   font-weight: 400;
+   font-size: 24px;
+   line-height: 34.75px;
+   font-family: 'Zen Maru Gothic';
+ }
+ .login{
+   text-align: center;
+   position: relative;
+   border-radius: 60px;
+   border:3px solid black;
+   width: 230px;
+   height: 40px;
+   background: #D0D0D0;
+   top:265px;
+ 
+ 
+ }
+ .quiz{
+   background-color: rgb(0, 255, 221);
+   margin: 200px;
+   padding:15px;
+   margin-right:400px;
+   margin-left:400px;
+   border-radius: 40px;
+   position: relative;
+   top:100px;
+ 
+ }
+ .questions{
+   font-family:Georgia, 'Times New Roman', Times, serif;
+   text-align: center;
+   border-bottom:1px solid black;
+   padding-bottom: 30px;
+ }
+ .button{
+   position: relative;
+   background: linear-gradient(180deg, #E73BCC 0%, #342181 100%);
+   border-radius: 60px;
+   top: 300px;
+   width: 153px;
+   height: 80px;
+   border: 1px solid #000000;
+   color: #FFFFFF;
+   font-weight: 400;
+   font-size: 24px;
+   font-family: "Yellowtail";
+ }
+ .quest{
+   position: relative;
+   top:270px;
+   font-weight: 400;
+   font-size: 24px;
+   line-height: 34.75%;
+   font-family: 'Zen Maru Gothic';
+   padding: 0%;
+ }
+ .avatar{
+   background-image: url('/public/avatar.png');
+   width: 40%;
+   height: 120px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+   position: relative;
+   bottom:180px;
+   left: 87px;
+   
+ }
+ 
+ 
+ .field{
+   position:relative;
+   text-align: center;
+   background-color: #F9F6F6;
+   border-radius: 60px;
+   top: 5px;
+   padding-top: 90px;
+   padding-bottom: 160px;
+   margin-left: 15px;
+   margin-right: 15px;
+   margin-bottom: 30px;
+   margin-top: 20px;
+ 
+ }
+ .answers{
+   padding-top: 50px;
+   display: inline-flex;
+   flex-direction: column;
+   margin: 0%;
+ }
+ .answer{
+   margin-bottom: 20px;
+   width: 332px;
+   height: 58px;
+   border-radius: 15px;
+   border: 2px solid;
+   background-color: #D9D9D9;
+   font-size: larger;
+   font-weight: 500;
+ }
+ 
+ .photo{
+   width: 340px;
+   height: 190px;
+   margin: 0;
+ }
+ .elements{
+   position: relative;
+   top:50px
+ }
+ .question{
+   position: relative;
+   font-size:larger;
+   font-weight: 500;
+   padding-bottom: 20px;
+ }
+ .questPhoto{
+   padding-bottom: 10px;
+ }
+ .timer{
+   background:linear-gradient(120deg,#FF00C7, #5B00CE);
+   margin-right: 25px;
+   margin-left: 25px;
+   border-radius: 60px; 
+   margin-bottom: -30px;
+ }
+ .seconds{
+   font-size: larger;
+   color: #FFFFFF;
+ }
+ .ava{
+   padding-top: 80px;
+   width: 52px;
+   height: 52px;
+ }
+ .inputText{
+   border-radius: 30px;
+   width: 344px;
+   height: 170px;
+   border: 1.5px solid black;
+   text-align: center;
+   font-size: larger;
+   background-color:#D9D9D9;
+ }
+ 
+ .answers{
+   padding-top: 80px;
+ }
+ 
+ .toAnswer{
+   font-size: x-large;
+   color:#FFFFFF;
+   background: linear-gradient(#E43DB6, #6C277D);
+   border-radius: 30px;
+   width: 202px;
+   height: 84px;
+   border: 0cap;
+ }
+ .button1{
+   padding-top: 50px;
+ }
+ 
+ .fieldWrite{
+   position:relative;
+   text-align: center;
+   background-color: #F9F6F6;
+   border-radius: 60px;
+   top: 5px;
+   padding-bottom: 200px;
+   margin-left: 15px;
+   margin-right: 15px;
+   margin-bottom: 30px;
+   background-image: url('/public/question.png'); 
+ }
+ 
+ .avatarPerson{
+   margin-top: -30px;
+ }
+ .fieldAdd{
+   background-color: #FFFFFF;
+   position: relative;
+   text-align: center;
+   border-radius: 180px;
+   padding-bottom: 83px;
+   margin-top: 83px;
+   margin-right: 100px;
+   margin-left: 100px;
+   margin-bottom: 84px;
+ 
+ 
+ }
+ .AddQuest{
+   padding-top: 20px;
+   font-size: x-large;
+ }
+ .TextField{
+   background-color: #D9D9D9;
+   border-radius: 60px;
+   width: 1327px;
+   height: 70px;
+   border: solid gray 0px;
+   text-align: center;
+   color: #5f5f5f;
+   font-size: 20px;
+ }
+ .picField{
+   padding-top: 30px;
+ }
+ .pic{
+   width: 450px;
+   height: 150px;
+   border-radius: 60px;
+   background-color: #D9D9D9;
+   border: solid gray 0px;
+   text-align: center;
+   color: #5f5f5f;
+   font-size: 20px;
+ }
+ .addAns{
+   padding-top: 30px;
+ }
+ .dopAns{
+   color: #5f5f5f;
+   font-size: 20px;
+   font-weight: 400px;
+   
+ }
+ .viewing{
+   border-radius: 60px;
+   width: 650px;
+   height: 70px;
+   background: linear-gradient(45deg,#9213A7,#FD378A);
+   border: solid black 0px;
+   font-size: 30px;
+   color: white;
+   
+ }
+ .addButton{
+   padding-top: 20px;
+ }
+ .custom-checkbox{
+   border: solid #000000 1px;
+   background-color: #D9D9D9;
+   width: 30px;
+   height: 30px;
+ }
+ .lab{
+   font-size: large;
+ }
+ .check{
+   padding-top: 30px;
+ }
+ .puts{
+   position: absolute;
+   top:  50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+ }
+ .wab{
+   width: 450px;
+   height: 70px;
+   border-radius: 30px;
+   border: solid #000000 1.5px;
+   font-size: 30px;
+   margin-bottom: 40px;
+ }
+ .tenQ{
+   width: 450px;
+   height: 70px;
+   border-radius: 30px;
+   border: solid #000000 1.5px;
+   font-size: 30px;
+   margin-bottom: 40px;
+ 
+ }
+ .fiveQuests{
+   display: flex;
+   flex-direction: column;
+   margin-right: 100px;
+ }
+ .tenQuests{
+   position: absolute;
+   top:  50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   display: flex;
+   flex-direction: row;
+ 
+ }
+.backBut{
+   position: relative;
+   border-radius: 60px;
+   width: 650px;
+   height: 70px;
+   border: solid black 0px;
+   font-size: 30px;
+   right: 350px;
+}

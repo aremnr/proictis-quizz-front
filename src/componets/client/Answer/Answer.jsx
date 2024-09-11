@@ -1,19 +1,32 @@
 import styles from './answer.module.css';
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import mockQuestions from '../../mocks/mocks';
-import { useParams } from 'react-router-dom';
-
+import React, { useEffect } from 'react';
+import mockQuestions from '../../../mocks/mocks';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Timer } from '../Timer/timer2/Timer';
 
 export function Answer() {
     const { id } = useParams(); // Получаем параметр id из URL
     const questionId = parseInt(id, 10); // Преобразуем id в число
+    const navigate = useNavigate();
+
     const currentQuestion = mockQuestions.find(q => q.id === questionId);
-  
+
     if (!currentQuestion) {
-      return <p>Вопрос не найден</p>; // Если вопрос с таким id не найден
+        return <p>Вопрос не найден</p>; // Если вопрос с таким id не найден
     }
-  
+
+    // Функция, которая будет вызвана по окончании таймера
+    const handleTimerEnd = () => {
+        const nextQuestionId = questionId + 1;
+        if (nextQuestionId <= mockQuestions.length) {
+            // Переход на следующий вопрос
+            navigate(`/questions/${nextQuestionId}`);
+        } else {
+            // Логика, если вопросы закончились, например, показываем страницу с результатами
+            navigate('/winner');
+        }
+    };
+
     return (
       <div className={styles.bgimage}>
         <div className={styles.outercontainer2}>
@@ -24,7 +37,7 @@ export function Answer() {
                 <img className={styles.photo} src="/gubka.jpg" alt="Gubka" />
                 <p className={styles.Rightanswer}>Верный ответ:</p>
               </div>
-  
+
               <div className={styles.answers}>
                 {currentQuestion.answers.map((answer, index) => (
                   <button
@@ -40,9 +53,10 @@ export function Answer() {
                   </button>
                 ))}
               </div>
+              
             </div>
           </div>
         </div>
       </div>
     );
-  }
+}

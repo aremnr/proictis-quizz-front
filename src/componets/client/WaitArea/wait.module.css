@@ -1,15 +1,14 @@
 .bgimage{
    background-image: url('/public/question.png');
-   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw; /* 90% ширины родительского элемента */
-  height: 100vh; /* 90% высоты окна просмотра */
-  margin: 0 auto; /* Центрирование контейнера по горизонтали */
-  padding: 10px; /* Внутренние отступы */
-  background-size: cover;
-  background-position: center;
-  box-sizing: border-box;
+   background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Используем min-height вместо height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем отступы */
+    margin: 0; /* Убираем отступы для родительского контейнера */
+    overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
  
  }
 

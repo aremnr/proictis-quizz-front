@@ -1,11 +1,15 @@
 
 .bgimage {
    background-image: url('/public/background2.png'); 
-   background-size: cover;  
-   background-position: center;
-   justify-content: center;
-   align-items: center;
    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Используем min-height вместо height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем отступы */
+    margin: 0; /* Убираем отступы для родительского контейнера */
+    overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
 }
 
 .outercontainer {
@@ -56,9 +60,9 @@
  
  .image2 {
    position: absolute;
-   top: -117px;
-   left: 23px;
-   width: 215px; 
+   top: -122px;
+   left: 22px;
+   width: 192px; 
    z-index: 2; 
    opacity: 1;
  }

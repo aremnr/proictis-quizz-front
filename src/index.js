@@ -5,38 +5,62 @@ import './index.css';
 import App from './App';
 import './App.css';
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
-import {Home} from './componets/Home/Home';
-import {Question} from './componets/Question/question'
-import {Questions} from './componets/Question/Questions'
-import {Answer} from './componets/Answer/Answer'
-import {Wait} from './componets/WaitArea/wait'
-import {Winner} from './componets/Winner/Winner'
+import {Home} from './componets/client/Home/Home';
+import {Questions} from './componets/client/Question/Questions';
+import {Answer} from './componets/client/Answer/Answer';
+import {Wait} from './componets/client/WaitArea/wait';
+import {Winner} from './componets/client/Winner/Winner';
+import { Fade } from '@mui/material';
+import {AddQuestion} from './componets/admin/addquestion/AddQuestion';
+import {Quests} from './componets/admin/quests/Quests';
+import {WatchAdBack} from './componets/admin/watchadback/WatchAdBack';
+import {AdminReg} from './componets/admin/adminreg/AdminReg';
+import {Welcome} from './componets/admin/Welcome/Welcome';
+import {AdminLog} from './componets/admin/adminlog/adminlog';
+import {PreviousQuiz} from './componets/admin/previousquiz/PreviousQuiz';
+import {AddQuiz} from './componets/admin/addquiz/AddQuiz';
+
+
+
+
+
+
 
 const router = createBrowserRouter([
-  {
-    path:'/question/:id',
-    element:<Question/>,
-    
-  },
   {
     path:'/app',
     element:<App />
   },
   {
     path:'/home',
-    element:<Home/>
+    element:
+    <Fade in>
+    <div>
+      <Home/>
+    </div>
+    </Fade>
   },
   {
     path: '/',
-    element: <Navigate to='/home' replace />
+    element: <AdminLog/>
   },
+  
   {
     path: '/questions/:id',
-    element: <Questions/>
+    element: <Fade in timeout={2000}>
+      <div>
+        <Questions/>
+      </div>
+    </Fade>
   },
   {
     path: '/answer/:id',
-    element: <Answer/>
+    element:
+    <Fade in timeout={1000}>  
+      <div>
+        <Answer/>
+      </div>
+    </Fade>
   },
   {
     path: '/wait',
@@ -46,6 +70,39 @@ const router = createBrowserRouter([
     path: '/winner',
     element: <Winner/>
   },
+  {
+    path: '/AddQuestion',
+    element: <AddQuestion/>
+  },
+  {
+    path: '/Quests',
+    element: <Quests/>
+  },
+  {
+    path: '/WatchAdBack',
+    element: <WatchAdBack/>
+  },
+  {
+    path: '/Adminreg',
+    element: <AdminReg/>
+  },
+  {
+    path: '/Welcome',
+    element: <Welcome/>
+  },
+  {
+    path: '/Adminlog',
+    element: <AdminLog/>
+  },
+  {
+    path: '/PreviousQuiz',
+    element: <PreviousQuiz/>
+  },
+  {
+    path: '/AddQuiz',
+    element: <AddQuiz/>
+  }
+
 ])
 
 

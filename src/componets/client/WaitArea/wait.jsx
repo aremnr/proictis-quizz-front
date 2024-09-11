@@ -1,20 +1,26 @@
 import styles from './wait.module.css';
 import Button from '@mui/material/Button';
-import { Timer } from '../Timer/Timer';
+import { Slide } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 export function Wait(){
-         const navigate = useNavigate(); // Инициализируйте navigate
+   
+      //    const navigate = useNavigate(); // Инициализируйте navigate
 
-      useEffect(() => {
-         // Таймер, который сработает через 5 секунд (5000 миллисекунд)
-         const timer = setTimeout(() => {
-            navigate('/questions/1'); // Перейдите к первому вопросу
-         }, 5000); // Установите нужное время в миллисекундах
+      // useEffect(() => {
+      //    // Таймер, который сработает через 5 секунд (5000 миллисекунд)
+      //    const timer = setTimeout(() => {
+      //       navigate('/questions/1'); // Перейдите к первому вопросу
+      //    }, 5000); // Установите нужное время в миллисекундах
 
-         // Очистка таймера при размонтировании компонента
-         return () => clearTimeout(timer);
-      }, [navigate]);
+      //    // Очистка таймера при размонтировании компонента
+      //    return () => clearTimeout(timer);
+      // }, [navigate]);
+      const navigate = useNavigate(); // Инициализируем хук useNavigate
+
+      const handleStart = () => {
+      navigate('question/1'); // Переход на страницу с вопросом id=1
+  };
    return(
       <div>
          <div className={styles.bgimage}>

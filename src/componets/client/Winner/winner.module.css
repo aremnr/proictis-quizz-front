@@ -1,6 +1,14 @@
 .bgimage{
   background-image: url('/public/question.png');
-
+  background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Используем min-height вместо height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Убираем отступы */
+    margin: 0; /* Убираем отступы для родительского контейнера */
+    overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
 }
 
 

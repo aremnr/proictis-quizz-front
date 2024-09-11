@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './questionstyle.module.css';
-import { Timer } from '../Timer/Timer';
+import { Timer } from '../Timer/timer1/Timer';
 import Button from '@mui/material/Button';
-import mockQuestions from '../../mocks/mocks';
-import { useParams } from 'react-router-dom';
+import mockQuestions from '../../../mocks/mocks';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 //  export function Questions(){
 //     return(
@@ -37,13 +38,32 @@ import { useParams } from 'react-router-dom';
 
 export function Questions(){
     const { id } = useParams();
+    const navigate = useNavigate();
     const questionIndex = parseInt(id, 10) - 1; // Преобразуем ID в индекс массива
     const currentQuestion = mockQuestions[questionIndex];
+
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+    // Сбрасываем выбранный ответ при изменении вопроса
+    useEffect(() => {
+        setSelectedAnswer(null);
+    }, [id]); // Зависимость от id, чтобы сбрасывать состояние при изменении вопроса
 
     if (!currentQuestion) {
         return <p>Вопрос не найден.</p>;
     }
+
+    const handleAnswerClick = (index) => {
+        setSelectedAnswer(index);
+    };
+
+    const handleTimerEnd = () => {
+        // Переходим на страницу с ответом для текущего вопроса
+        navigate(`answer/${id}`);
+    };
+
     return(
+        
         <div>
             <div className={styles.bgimage}>
                 <div className={styles.outerContainer}>
@@ -53,12 +73,19 @@ export function Questions(){
                             <div className={styles.questPhoto}>
                                 <img className={styles.photo} src="/gubka.jpg" alt="Gubka" />
                             </div>
-                            <div className={styles.timerpadding1}><Timer seconds={60} /></div>
+                            <div className={styles.timerpadding1}><Timer key={id} seconds={5} onTimerEnd={handleTimerEnd} /></div>
                             <div className={styles.answers}>
                             {currentQuestion.answers.map((answer, index) => (
-                                    <button key={index} className={styles.answer}>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        key={index}
+                                        className={`${styles.answer} ${selectedAnswer === index ? styles.selected : ''}`}
+                                        onClick={() => handleAnswerClick(index)}
+                                    >
                                         {answer}
-                                    </button>
+                                    </Button>
+                                    
                                 ))}
                             </div>
                             
@@ -73,6 +100,8 @@ export function Questions(){
                     </div>
                 </div>
             </div>
+            
         </div>
+        
     );
 }

@@ -1,0 +1,205 @@
+/* styles.module.css */
+.bg {
+   background-image: url('/public/bgadmin.png');
+   background-size: cover;
+   background-position: center;
+   min-height: 110vh; /* Используем min-height вместо height */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 0; /* Убираем отступы */
+   margin: 0; /* Убираем отступы для родительского контейнера */
+   overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
+   position: relative;
+}
+.OuterContainer {
+   background-color: white;
+   padding: 0px 40px 40px 40px; /* Увеличиваем отступы */
+   width: 160vh;
+   height: 100vh auto;
+   max-width: 83%; /* Увеличиваем максимальную ширину контейнера */
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Увеличиваем тень для объема */
+   border-radius: 150px; /* Увеличиваем радиус скругления */
+   opacity: 0.95;
+   
+}
+.inputStyle {
+   margin-bottom: 30px;
+   width: 65%;
+   height: 70px;
+   border-radius: 25px;
+   border: none; /* Убираем границу */
+   background-color: #D9D9D9;
+   font-size: 32px;
+   color: black;
+   
+}
+.InnerContainer{
+   text-align: center;
+   align-items: center;
+
+}
+.header {
+   text-align: center;
+   padding: 20px;
+   font-family: 'ZenMaruGothic';
+   font-weight: 400;
+   font-size: 50px;
+   margin-bottom: 7%; /* Добавляем отступ снизу */
+}
+
+
+
+.label {
+   font-size: 16px; /* Увеличиваем размер шрифта */
+   margin-bottom: 15px; /* Увеличиваем отступ */
+   display: block;
+   font-family: 'ZenMaruGothic';
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.inputField {
+   width: 100%;
+   padding: 15px; /* Увеличиваем внутренний отступ */
+   border: 1px solid #ccc;
+   border-radius: 6px; /* Увеличиваем радиус скругления */
+   font-size: 18px; /* Увеличиваем размер шрифта */
+}
+
+.createAccountBtn {
+   width: 100%;
+   padding: 15px; /* Увеличиваем внутренний отступ */
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 6px; /* Увеличиваем радиус скругления */
+   font-size: 18px; /* Увеличиваем размер шрифта */
+   cursor: pointer;
+}
+
+.createAccountBtn:hover {
+   background-color: #0056b3;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
+.passwordContainer {
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: center; /* Центрируем содержимое контейнера */
+}
+
+.inputField {
+   width: 100%;
+   padding: 15px;
+   border: 1px solid #ccc;
+   border-radius: 6px;
+   font-size: 18px;
+   box-sizing: border-box;
+}
+
+.eyeIcon {
+   position: absolute;
+   right: 19%; /* Расположим иконку в правой части поля */
+   top: 35%;
+   transform: translateY(-50%); /* Центрируем иконку по вертикали */
+   cursor: pointer;
+   font-size: 24px;
+   color: #000000;
+   display: flex;
+   align-items: center;
+}
+
+.inputWrapper {
+   position: relative;
+   width: 100%;
+}
+.fieldContainer{
+   text-align: center;
+}
+
+.buttonstart{
+   
+  background: linear-gradient(60deg, #E73BCC, #342181);
+  text-align: center; 
+  border-radius: 45px; 
+  width: 50%;
+  height: 85px; 
+  color: white;
+  border: none;
+  font-family: 'ZenMaruGothic';
+  font-weight: 400;
+  font-size: 24px;
+  cursor: pointer;
+ animation: gradientAnimation 2.3s ease infinite;
+ background-size: 200% 200%;
+}
+
+@keyframes gradientAnimation {
+   0% {
+       background-position: 0% 50%;
+   }
+   50% {
+       background-position: 100% 50%;
+   }
+   100% {
+       background-position: 0% 50%;
+   }
+ }
+
+
+
+
+.errorMessage {
+   font-size: 20px;
+   color: red; /* Красный цвет для сообщения об ошибке */
+    /* Отступ сверху */
+    font-family: 'ZenMaruGothic';
+}
+
+@media (max-width: 1280px) {
+   .bg {
+       min-height: 140vh; 
+   }
+}
+
+@media (max-height: 720px) {
+   .bg {
+      min-height: 140vh;
+  }
+}
+
+.container{
+   margin-bottom: 7%;
+}
+
+.createAccountText {
+   text-align: center;
+   margin-top: 20px;
+   font-family: 'ZenMaruGothic';
+   font-size: 18px;
+}
+
+.createAccountLink {
+   color: #C92699;
+   text-decoration: none;
+}
+
+.createAccountLink:hover {
+   text-decoration: underline;
+}
+.modalBackdrop {
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+   backdrop-filter: blur(5px); /* Размытие фона */
+   z-index: 999; /* Убедитесь, что этот элемент находится поверх других элементов */
+}
+
