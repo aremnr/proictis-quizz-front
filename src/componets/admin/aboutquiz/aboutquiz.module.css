@@ -1,0 +1,270 @@
+/* Внешний контейнер с фоном */
+.bg {
+   background-image: url('/public/bgadmin.png');
+   background-size: cover;
+   background-position: center;
+   min-height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 0;
+   margin: 0;
+   overflow: hidden; /* Скрывает все, что выходит за пределы */
+}
+
+/* Белый контейнер, внутри которого будет ползунок */
+.OuterContainer {
+   background-color: white;
+   padding: 45px; /* Добавьте отступы, чтобы содержимое не прилипало к краям */
+   width: 100%;
+   max-width: 73%;
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+   border-radius: 100px;
+   opacity: 1;
+   height: 550px; /* Высота для контейнера */
+   overflow: hidden; /* Отключает прокрутку на контейнере */
+}
+
+/* Внутренний контейнер */
+.InnerContainer {
+   text-align: center;
+   align-items: center;
+   height: 100%; /* Занимает всю высоту OuterContainer */
+}
+
+/* Контейнер для списка квизов с прокруткой */
+.quizListContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 15px; /* Расстояние между квизами */
+   padding: 0; /* Убираем внутренние отступы */
+   height: 100%; /* Занимает 70% от InnerContainer */
+   overflow-y: auto; /* Включает вертикальную прокрутку */
+   overflow-x: hidden; /* Отключает горизонтальную прокрутку */
+}
+
+
+.quizItem {
+   display: flex;
+   justify-content: space-between; /* Распределяет элементы по горизонтали */
+   align-items: center; /* Центрирует элементы по вертикали */
+   background-color: #D9D9D9;
+   padding: 25px;
+   border-radius: 25px;
+   height: 120px; /* Увеличенная высота для каждого квиза */
+   width: 80%; /* Уменьшенная ширина квиза (80% от родительского элемента) */
+   margin: 15px auto; /* Центрирование и расстояние между квизами */
+   position: relative; /* Позволяет использовать псевдоэлементы */
+   margin-bottom: 10px;
+   cursor: pointer; /* Указывает на то, что элемент кликабельный */
+   transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.quizItem:hover {
+   background-color: #B0B0B0; /* Цвет фона при наведении */
+}
+
+.quizItem::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 50%; /* Центрируем полосу по горизонтали */
+   width: 1px; /* Ширина полосы */
+   height: 100%; /* Высота полосы */
+   background-color: black; /* Цвет полосы */
+   transform: translateX(-50%); /* Центрируем полосу относительно левой стороны */
+}
+
+.quizTitle{
+    text-align: center; /* Центрируем текст */
+    flex: 1; /* Делаем текст адаптивным */
+}
+
+.quizDescription {
+   font-family: 'ZenMaruGothic', sans-serif;
+   font-size: 14px;
+   color: #666;
+   overflow: hidden; /* Убираем это свойство, чтобы текст не скрывался */
+   white-space: normal; /* Позволяет перенос строк */
+   max-width: 49%; /* Устанавливаем максимальную ширину для описания */
+   word-wrap: break-word; /* Позволяет перенос слов, если они слишком длинные */
+   margin-left: 10px; /* Отступ слева для разделения между заголовком и описанием */
+   text-align: center; /* Центрируем текст */
+    flex: 1; 
+}
+
+.quizDescription {
+   color: #666; /* Цвет описания */
+}
+
+/* Если описания нет, показываем "Без описания" */
+.quizDescription::after {
+   content: attr(data-description);
+   display: inline; /* Отображаем только когда есть описание */
+}
+
+/* Стили для пустого описания */
+.quizItem:has(.quizDescription:empty) .quizDescription::after {
+   content: "Нет"; /* Показать "Нет", если описания нет */
+}
+
+
+.quizTitle {
+   font-family: 'ZenMaruGothic', sans-serif;
+   font-size: 16px;
+   color: #333;
+}
+
+.quizDescription {
+   font-family: 'ZenMaruGothic', sans-serif;
+   font-size: 14px;
+   color: #666;
+}
+
+/* Настройка полосы прокрутки */
+.quizListContainer::-webkit-scrollbar {
+   width: 19px; /* Ширина полосы прокрутки */
+}
+
+/* Настройка полосы (track) */
+.quizListContainer::-webkit-scrollbar-track {
+   background: #f1f1f1; /* Цвет фона полосы */
+   border-radius: 10px; /* Скругленные углы */
+}
+
+/* Настройка ползунка (thumb) */
+.quizListContainer::-webkit-scrollbar-thumb {
+   background-color: #8B8B8B; /* Цвет ползунка */
+   border-radius: 10px; /* Скругленные углы */
+   height: 69px; /* Высота ползунка */
+   width: 19px; /* Ширина ползунка */
+}
+
+/* Настройка ползунка при наведении */
+.quizListContainer::-webkit-scrollbar-thumb:hover {
+   background-color: #555; /* Цвет ползунка при наведении */
+}
+
+.header {
+   font-family: 'Yaldevi', sans-serif;
+  font-weight: 500; /* Medium вес шрифта */
+  font-size: 30px; /* Настройте размер шрифта по вашему желанию */
+   text-align: center; /* Центрируем заголовок */
+   margin: 0 0 40px 0; /* Убираем верхний отступ и оставляем отступ снизу */
+   color: #333; /* Цвет заголовка */
+}
+
+.backButton {
+   background-color: transparent; /* Прозрачный фон */
+   border: none; /* Убираем рамку */
+   cursor: pointer; /* Указывает на то, что элемент кликабельный */
+   font-size: 32px; /* Увеличиваем размер шрифта для значка стрелки */
+   margin-top: -25px;
+   margin-bottom: 20px; /* Отступ снизу */
+   transition: transform 0.3s; /* Плавный переход для эффекта наведения */
+   display: flex; /* Используем flex для центрирования содержимого */
+   align-items: center; /* Центрируем по вертикали */
+   justify-content: center; /* Центрируем по горизонтали */
+   border-radius: 5px; /* Скругляем углы кнопки */
+   height: 50px; /* Устанавливаем высоту кнопки */
+   width: 50px; /* Устанавливаем ширину кнопки */
+}
+
+/* Стили для надписи таймера */
+.timerLabel {
+   font-size: 18px;
+   color: #333;
+   margin-bottom: 30px;
+   font-family: 'Yaldevi', sans-serif;
+   font-weight: 500;
+ }
+ 
+
+ /* Стили для текста "Количество вопросов" */
+ .questionsLabel {
+   font-size: 18px;
+   color: #333;
+   margin-bottom: 30px;
+   font-family: 'Yaldevi', sans-serif;
+   font-weight: 500;
+ }
+ 
+ /* Стили для кнопки создания квиза */
+ .createButton {
+   margin-top: 30px;
+   background-color: #3f51b5;
+   color: white;
+ }
+
+/* Стили для контейнера таймера */
+.timerContainer {
+   width: 100%; /* Ширина 70% от InnerContainer */
+   margin: 0 auto 20px auto; /* Центрируем и добавляем отступ снизу */
+   text-align: center;
+ }
+ 
+ /* Стили для поля ввода времени */
+ .timerInput {
+   background-color: #D9D9D9; /* Светло-серый фон */
+   border-radius: 30px; /* Скругленные углы */
+   border: none; /* Граница */
+   width: 20%; /* Ширина 100% от родительского контейнера */
+   padding: 10px; /* Внутренние отступы */
+   font-size: 16px; /* Размер шрифта */
+   box-sizing: border-box; /* Учитываем отступы и рамки */
+
+ }
+ 
+ /* Стили для подсказки */
+ .timerHint {
+   color: #999; /* Серый текст */
+   font-size: 12px; /* Меньший размер шрифта */
+   margin-bottom: 10px;
+ }
+
+ .buttonstart{
+   margin: 35px auto 0;
+  background: linear-gradient(60deg, #E73BCC, #342181);
+  text-align: center; 
+  border-radius: 45px; 
+  width: 40%;
+  height: 67px; 
+  color: white;
+  border: none;
+  font-family: 'ZenMaruGothic';
+  font-weight: 400;
+  font-size: 24px;
+  cursor: pointer;
+ animation: gradientAnimation 2.3s ease infinite;
+ background-size: 200% 200%;
+}
+
+/* @keyframes gradientAnimation {
+   0% {
+       background-position: 0% 50%;
+   }
+   50% {
+       background-position: 100% 50%;
+   }
+   100% {
+       background-position: 0% 50%;
+   }
+ } */
+ 
+ 
+ .inputStyle {
+   margin-bottom: 30px;
+   width: 65%;
+   height: 70px;
+   border-radius: 25px;
+   border: none; /* Убираем границу */
+   background-color: #D9D9D9;
+   font-size: 32px;
+   color: black;
+   text-align: center;
+   
+   
+}
+
+
+

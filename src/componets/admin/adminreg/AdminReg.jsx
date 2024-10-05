@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import styles from './adminreg.module.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';  // Импортируем axios
+import MD5 from "crypto-js/md5";
 
 export function AdminReg() {
     const navigate = useNavigate(); // Хук для навигации
@@ -15,9 +17,12 @@ export function AdminReg() {
         setPasswordShown(!passwordShown);
     };
 
+    const handleBackClick = () => {
+        navigate(-1); // Возвращаемся на предыдущую страницу
+      };
+
     const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
-        // Регулярное выражение для проверки ввода только английских букв и цифр
         const regex = /^[a-zA-Z0-9]*$/;
 
         if (regex.test(newPassword) || newPassword === '') {
@@ -29,14 +34,31 @@ export function AdminReg() {
     };
 
     const handleSubmit = () => {
-        // Проверка, что все поля заполнены
         if (!username || !password || !referralCode) {
             alert('Пожалуйста, заполните все поля.'); // Выводим предупреждение
             return;
         }
 
-        // Если все поля заполнены, переводим на другую страницу
-        navigate('/Welcome'); // Замените '/next-page' на путь, куда хотите перейти
+        console.log(MD5(username).toString())
+        axios.post('https://quiz.dev.schtil.com/register', {
+            username: username,
+            password: password,
+            email: MD5(username).toString() + '@test.com',
+            referral_token: referralCode
+        }, {
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        })
+          .then(function (response) {
+            console.log(response.data)
+            navigate('/Welcome')    
+          })
+          .catch(function (error) {
+            console.log(error)
+            // console.log(error.response.data.detail);
+            // alert(error.response.data.detail);
+          });
     };
 
     return (
@@ -98,7 +120,10 @@ export function AdminReg() {
                                 </Button>
                             </div>
                         </div>
-                    </div>
+                    </div> <button className={styles.backButton} onClick={handleBackClick}>
+                                                            &#8592;
+                                                            </button>
+                    
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import styles from './welcome.module.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export function Welcome() {
     const navigate = useNavigate();
@@ -20,13 +21,20 @@ export function Welcome() {
     };
 
     const handleCreateReferralCode = () => {
-        const code = generateReferralCode();
-        setReferralCode(code);
-        setOpenModal(true);
-    };
-
-    const generateReferralCode = () => {
-        return Math.random().toString().slice(2, 18);
+        const accessToken = localStorage.getItem('access_token')
+        axios.post('https://quiz.dev.schtil.com/create_referral', {}, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': `Bearer ${accessToken}`
+            }
+        })
+          .then(function (response) {
+            setReferralCode(response.data.referral)
+            setOpenModal(true)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     };
 
     const handleCloseModal = () => {

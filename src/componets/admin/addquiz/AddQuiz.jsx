@@ -17,7 +17,7 @@ export function AddQuiz() {
       return;}
 
     // Если все поля заполнены, переводим на другую страницу
-    navigate('/Welcome'); // Замените '/next-page' на путь, куда хотите перейти
+    navigate('/aboutquiz'); // Замените '/next-page' на путь, куда хотите перейти
 };
 
   const handleQuizCreation = () => {
