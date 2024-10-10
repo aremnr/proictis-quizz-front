@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './addquestion.module.css';
 
 export function AddQuestion() {
-  const [questions, setQuestions] = useState([{ text: '', answers: [''], points: 1 }]);
+  const location = useLocation()
+  const maxQuestions = location.state.maxQuestions
+  const [questions, setQuestions] = useState([{ text: '', answers: ['', '', '', '', ''], points: 1, correctAnswerIndices: [] }]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const navigate = useNavigate();
@@ -15,8 +17,8 @@ export function AddQuestion() {
   };
 
   const addAnswerField = () => {
-    if (questions[currentQuestion].answers.length < 5) {
-      const newQuestions = [...questions];
+    const newQuestions = [...questions];
+    if (newQuestions[currentQuestion].answers.length < 5) {
       newQuestions[currentQuestion].answers.push('');
       setQuestions(newQuestions);
     }
@@ -35,15 +37,15 @@ export function AddQuestion() {
   };
 
   const handleNextClick = () => {
-    if (isLastQuestion || currentQuestion === 4) {
+    console.log(currentQuestion, maxQuestions)
+    if (isLastQuestion || currentQuestion + 1 >= maxQuestions) {
       const quizData = {
         questions: questions,
-        // Добавьте здесь другие данные о квизе, если нужно
       };
-      localStorage.setItem('quizData', JSON.stringify(quizData)); // Сохраняем вопросы в localStorage
-      navigate('/done'); // Навигация на страницу Done
+      localStorage.setItem('quizData', JSON.stringify(quizData));
+      navigate('/done', { state: { maxQuestions } });
     } else {
-      const newQuestion = { text: '', answers: [''], points: 1 };
+      const newQuestion = { text: '', answers: ['', '', '', '', ''], points: 1, correctAnswerIndices: [] };
       setQuestions([...questions, newQuestion]);
       setCurrentQuestion(currentQuestion + 1);
     }
@@ -53,7 +55,7 @@ export function AddQuestion() {
     const savedQuiz = localStorage.getItem('quizData');
     if (savedQuiz) {
       const quizData = JSON.parse(savedQuiz);
-      setQuestions(quizData.questions); // Загружаем вопросы из сохраненного квиза
+      setQuestions(quizData.questions);
     }
   }, []);
 
@@ -61,12 +63,30 @@ export function AddQuestion() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     } else {
-      navigate('/previousPage'); // Навигация на предыдущую страницу
+      navigate(-1);
     }
   };
 
   const handleCheckboxChange = (event) => {
     setIsLastQuestion(event.target.checked);
+  };
+
+  const handleCorrectAnswerChange = (index) => {
+    const newQuestions = [...questions];
+    const correctAnswers = newQuestions[currentQuestion].correctAnswerIndices || [];
+
+    console.log('Before:', correctAnswers);
+
+    if (correctAnswers.includes(index)) {
+      newQuestions[currentQuestion].correctAnswerIndices = correctAnswers.filter(i => i !== index);
+    } else {
+      newQuestions[currentQuestion].correctAnswerIndices = [...correctAnswers, index];
+    }
+
+    console.log('After:', newQuestions[currentQuestion].correctAnswerIndices);
+    setQuestions(newQuestions);
+
+    console.log(questions)
   };
 
   return (
@@ -87,14 +107,22 @@ export function AddQuestion() {
           <div className={styles.variants}>
             <div className={styles.answersContainer}>
               {questions[currentQuestion].answers.map((answer, index) => (
-                <div key={index}>
-                  <input
-                    type="text"
-                    placeholder="добавить вариант ответа"
-                    value={answer}
-                    onChange={(e) => handleInputChange(index, e)}
-                    className={styles.variantsInput}
-                  />
+                <div key={index} className={styles.answerOption}>
+                  <label className={styles.inputContainer}>
+                    <input
+                      type="text"
+                      placeholder="добавить вариант ответа"
+                      value={answer}
+                      onChange={(e) => handleInputChange(index, e)}
+                      className={styles.variantsInput}
+                    />
+                    <input
+                      type="checkbox" // Измените на checkbox для множественного выбора
+                      checked={questions[currentQuestion].correctAnswerIndices?.includes(index) || false} // Добавляем || false для безопасности
+                      onChange={() => handleCorrectAnswerChange(index)} // Установка правильного ответа
+                      className={`${styles.checkmark} ${questions[currentQuestion].correctAnswerIndices?.includes(index) ? styles.selected : ''}`} // Добавьте класс для стилей
+                    />
+                  </label>
                 </div>
               ))}
             </div>

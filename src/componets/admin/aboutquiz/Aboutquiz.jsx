@@ -1,12 +1,13 @@
 import styles from './aboutquiz.module.css';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 export function Aboutquiz() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState(''); // Добавляем состояние для описания
   const navigate = useNavigate();
+  const location = useLocation()
 
   const handleBackClick = () => {
     navigate(-1);
@@ -27,7 +28,7 @@ export function Aboutquiz() {
     savedQuizzes.push(newQuiz); // Добавляем новый квиз в список
     localStorage.setItem('quizzes', JSON.stringify(savedQuizzes)); // Сохраняем обновленный список в localStorage
 
-    navigate('/AddQuestion'); // Перенаправляем на страницу добавления вопросов
+    navigate('/AddQuestion', { state: { maxQuestions: location.state.maxQuestions } }); // Перенаправляем на страницу добавления вопросов
   };
 
   return (

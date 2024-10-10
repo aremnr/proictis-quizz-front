@@ -1,20 +1,37 @@
 import styles from './previousquiz.module.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Импортируем axios
 
 export function PreviousQuiz() {
   const [quizList, setQuizList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
-    setQuizList(savedQuizzes); // Устанавливаем квизы в состояние
+    // Закомментировано: получение списка квизов с бэкенда
+    /*
+    axios.get('https://quiz.dev.schtil.com/quizzes')
+      .then(response => {
+        setQuizList(response.data); // Устанавливаем квизы в состояние после получения с бэкенда
+      })
+      .catch(error => {
+        console.error('Ошибка при получении квизов:', error);
+      });
+    */
   }, []);
 
   const handleQuizClick = (quiz) => {
-    // Сохраняем выбранный квиз в localStorage
-    localStorage.setItem('currentQuiz', JSON.stringify(quiz));
-    navigate('/AddQuestion'); // Перенаправляем на страницу добавления вопросов
+    // Закомментировано: сохранение выбранного квиза на бэкенде или в другом состоянии
+    /*
+    axios.post(`https://quiz.dev.schtil.com/quiz/${quiz.id}/select`)
+      .then(() => {
+        navigate('/AddQuestion'); // Перенаправляем на страницу добавления вопросов
+      })
+      .catch(error => {
+        console.error('Ошибка при выборе квиза:', error);
+      });
+    */
+    navigate('/AddQuestion'); // Переход пока без взаимодействия с бэкендом
   };
 
   const handleBackClick = () => {

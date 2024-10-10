@@ -186,7 +186,7 @@
 
 @media (min-width: 1280px), (min-height: 720px) {
     .bg {
-        min-height: 150vh;
+        min-height: 100vh;
     }
 }
 
@@ -196,7 +196,7 @@
 @media (min-width: 1920px) {
         .bg {
             width: auto; 
-            min-height: 180vh;
+            min-height: 100vh;
         }
         .OuterContainer {
             max-width: 60%;

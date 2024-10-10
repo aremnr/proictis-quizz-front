@@ -2,31 +2,57 @@ import styles from './addquiz.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
+import axios from 'axios'; // Импорт axios
 
 export function AddQuiz() {
-  const [time, setTime] = useState(0); // Таймер
-  const [questions, setQuestions] = useState(0); // Количество вопросов
+  const [time, setTime] = useState(''); // Таймер как строка
+  const [maxQuestions, setMaxQuestions] = useState(''); // Количество вопросов как строка
   const [isTimerEnabled, setIsTimerEnabled] = useState(true); // Включен ли таймер
 
   const navigate = useNavigate();
 
   const handleSubmit = () => {
     // Проверка, что все поля заполнены
-    if (!questions || (isTimerEnabled && !time)) {
-      alert('Пожалуйста, заполните количество вопросов и настройте таймер или отключите его.'); // Выводим предупреждение
-      return;}
+    if ((!maxQuestions || maxQuestions === '0') || (isTimerEnabled && (!time || time === '0'))) {
+      alert('Пожалуйста, заполните количество вопросов и настройте таймер или отключите его.');
+      return;
+    }
 
     // Если все поля заполнены, переводим на другую страницу
-    navigate('/aboutquiz'); // Замените '/next-page' на путь, куда хотите перейти
-};
+    handleQuizCreation();
+  };
 
   const handleQuizCreation = () => {
-    const quizData = {
-      time: isTimerEnabled ? time : null, // Если таймер отключен, отправляем null
-      questions: questions,
-    };
-    console.log('Отправка данных на бэкенд:', quizData);
-    // Здесь можно добавить логику отправки данных на бэкенд
+  //   const quizData = {
+  //     title: 'Новый квиз', // Пример данных, можно сделать динамическим
+  //     description: 'Описание квиза', // Пример данных, можно сделать динамическим
+  //     questions: [
+  //       {
+  //         question: "Пример вопроса", // Можешь обновить логикой для добавления вопросов
+  //         points: 1, // Пример очков
+  //         answers: [
+  //           {
+  //             text: "Пример ответа", // Пример ответа
+  //             correct: true, // Пример правильного ответа
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   };
+
+  //   axios.post('https://quiz.schtil.com/quiz/add', quizData, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //   .then(response => {
+  //     console.log('Квиз успешно создан:', response.data);
+      navigate('/aboutquiz', { state: { maxQuestions } });
+  //   })
+  //     .catch(error => {
+  //       console.error('Ошибка при создании квиза:', error);
+  //       alert('Произошла ошибка при создании квиза.');
+  //     });
   };
 
   const handleBackClick = () => {
@@ -36,14 +62,12 @@ export function AddQuiz() {
   return (
     <div className={styles.bg}>
       <div className={styles.OuterContainer}>
+        
         <div className={styles.InnerContainer}>
-          {/* Заголовок */}
           <h2 className={styles.header}>Создание quiz-игры</h2>
 
-          {/* Подсказка для таймера */}
           <p className={styles.timerHint}>Укажите время (максимум 2 минуты)</p>
 
-          {/* Таймер */}
           <p className={styles.timerLabel}>Таймер</p>
           <div className={styles.timerContainer}>
             <TextField
@@ -51,24 +75,28 @@ export function AddQuiz() {
               type="number"
               variant="outlined"
               value={time}
-              onChange={(e) => setTime(Math.min(2, Math.max(0, e.target.value)))} // Ограничиваем до 2 минут
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '' || (Number(value) >= 0 && Number(value) <= 2)) {
+                  setTime(value);
+                }
+              }} // Позволяем удалять значение и ограничиваем до 2 минут
               disabled={!isTimerEnabled}
               inputProps={{ min: 0, max: 2 }}
               sx={{
                 '& .MuiOutlinedInput-root': {
                   borderRadius: '30px',
                   backgroundColor: '#D9D9D9',
-                  border: 'none', // Убираем границу
-                  width: '70%', // Ширина 70% от контейнера
+                  border: 'none',
+                  width: '70%',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', // Убираем стандартную границу Material UI
+                  border: 'none',
                 },
               }}
             />
           </div>
 
-          {/* Чекбокс для отключения таймера */}
           <div>
             <FormControlLabel
               control={
@@ -77,47 +105,50 @@ export function AddQuiz() {
                   onChange={() => setIsTimerEnabled(!isTimerEnabled)}
                 />
               }
-              
               label="Таймер не нужен"
             />
           </div>
 
-          {/* Количество вопросов */}
           <div>
             <p className={styles.questionsLabel}>Количество вопросов</p>
+            
             <TextField
               className={styles.timerInput}
               type="number"
               variant="outlined"
-              value={questions}
-              onChange={(e) => setQuestions(Math.min(20, Math.max(1, e.target.value)))} // Ограничение до 20 вопросов
+              value={maxQuestions}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '' || (Number(value) >= 1 && Number(value) <= 20)) {
+                  setMaxQuestions(value);
+                }
+              }} // Позволяем удалять значение и ограничиваем до 20 вопросов
               inputProps={{ min: 1, max: 20 }}
               sx={{
                 '& .MuiOutlinedInput-root': {
                   borderRadius: '30px',
                   backgroundColor: '#D9D9D9',
-                  border: 'none', // Убираем границу
-                  width: '70%', // Ширина 70% от контейнера
+                  border: 'none',
+                  width: '70%',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  border: 'none', // Убираем стандартную границу Material UI
+                  border: 'none',
                 },
               }}
             />
+            <p className={styles.timerHint}>(макс. 20)</p>
           </div>
 
-          {/* Кнопка создания квиза */}
           <div>
-          <Button 
-          variant="contained"
-          color="secondary"
-          className={styles.buttonstart}
-          onClick={handleSubmit}>
-          Перейти к созданию квиза
-          </Button>
+            <Button 
+              variant="contained"
+              color="secondary"
+              className={styles.buttonstart}
+              onClick={handleSubmit}>
+              Перейти к созданию квиза
+            </Button>
           </div>
 
-          {/* Кнопка назад */}
           <button className={styles.backButton} onClick={handleBackClick}>
             &#8592;
           </button>

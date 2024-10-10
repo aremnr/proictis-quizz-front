@@ -348,5 +348,15 @@ background-size: 200% 200%;
   display: none; /* Скрывает ползунок */
 }
 
-
-
+.checkmark {
+  width: 24px; /* Ширина квадрата */
+  height: 24px; /* Высота квадрата */
+  border: 2px solid #9100a4; /* Граница квадрата */
+  border-radius: 4px; /* Скругление углов */
+  display: inline-block; /* Отображение в строку */
+  margin-right: 10px; /* Отступ справа */
+  cursor: pointer; /* Указатель при наведении */
+  position: relative; /* Позволяет позиционировать внутренний элемент */
+  background-color: transparent; /* Фон по умолчанию */
+  accent-color: #9100a4; /* Фиолетовый фон при выборе */
+}

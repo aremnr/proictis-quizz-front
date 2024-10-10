@@ -21,6 +21,7 @@ import {PreviousQuiz} from './componets/admin/previousquiz/PreviousQuiz';
 import {AddQuiz} from './componets/admin/addquiz/AddQuiz';
 import {Done} from './componets/admin/done/Done';
 import {Aboutquiz} from './componets/admin/aboutquiz/Aboutquiz'
+import {ListOfQuest} from './componets/admin/viewingquiz/ListOfQuest'
 
 
 
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
   {
     path: '/aboutquiz',
     element: <Aboutquiz/>
+  },
+  {
+    path: '/listofquest',
+    element: <ListOfQuest/>
   }
 
 
