@@ -1,6 +1,6 @@
-
+import'./AddQuiz.css';
 import { Registration } from './componets/Quiz'
-
+import './addQuestion.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Questions } from './componets/Questions';
 import { QuestionsWrite } from './componets/QuestionsWrite';
@@ -10,6 +10,7 @@ import { Quests } from './componets/Quests';
 import { AddQuiz } from './componets/AddQuiz';
 import {QuizForm} from './componets/AddQuestion';
 import addQuestion from './addQuestion';
+import Leaderboard from './componets/Winner';
 
 
 const router = createBrowserRouter([
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
 function App() {
   return(
     <div>
-      <QuizForm/>
+      <Leaderboard/>
       
     </div>
   );

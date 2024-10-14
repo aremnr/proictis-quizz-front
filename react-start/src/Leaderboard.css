@@ -1,0 +1,40 @@
+.leaderboard-container {
+    width: 400px; /* Увеличена ширина */
+  height: 800px; /* Увеличена высота */
+  margin: 0 auto;
+  padding: 50px; /* Увеличены внутренние отступы */
+    background: #fff;
+    border-radius: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 30px;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, td {
+    border: 2px solid black;
+  }
+  
+  td {
+    padding: 5px; /* Уменьшен padding для ячеек */
+    font-size: 18px; /* Размер шрифта можно немного уменьшить для сохранения пропорций */
+    height: 40px; /* Фиксированная высота для ячеек таблицы */
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
