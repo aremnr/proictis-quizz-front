@@ -58,10 +58,10 @@ body {
  }
  
  .photo{
-   width: 340px;
-   height: 190px;
-   margin: 0;
- }
+  width: 150px;
+  height: 150px;
+  margin: 0;
+}
  .elements{
   position: relative;
   top: 10px;

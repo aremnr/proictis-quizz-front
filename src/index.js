@@ -1,137 +1,151 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { StyledEngineProvider } from '@mui/material/styles';
-import './index.css';
-import App from './App';
-import './App.css';
-import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
-import {Home} from './componets/client/Home/Home';
-import {Questions} from './componets/client/Question/Questions';
-import {Answer} from './componets/client/Answer/Answer';
-import {Wait} from './componets/client/WaitArea/wait';
-import {Winner} from './componets/client/Winner/Winner';
-import { Fade } from '@mui/material';
-import {AddQuestion} from './componets/admin/addquestion/AddQuestion';
-import {Quests} from './componets/admin/quests/Quests';
-import {WatchAdBack} from './componets/admin/watchadback/WatchAdBack';
-import {AdminReg} from './componets/admin/adminreg/AdminReg';
-import {Welcome} from './componets/admin/Welcome/Welcome';
-import {AdminLog} from './componets/admin/adminlog/adminlog';
-import {PreviousQuiz} from './componets/admin/previousquiz/PreviousQuiz';
-import {AddQuiz} from './componets/admin/addquiz/AddQuiz';
-import {Done} from './componets/admin/done/Done';
-import {Aboutquiz} from './componets/admin/aboutquiz/Aboutquiz'
-import {ListOfQuest} from './componets/admin/viewingquiz/ListOfQuest'
-
-
-
-
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { StyledEngineProvider } from "@mui/material/styles";
+import "./index.css";
+import App from "./App";
+import "./App.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Home } from "./componets/client/Home/Home";
+import { Questions } from "./componets/client/Question/Questions";
+import { Answer } from "./componets/client/Answer/Answer";
+import { Wait } from "./componets/client/WaitArea/wait";
+import { Winner } from "./componets/client/Winner/Winner";
+import { Fade } from "@mui/material";
+import { AddQuestion } from "./componets/admin/addquestion/AddQuestion";
+import { Quests } from "./componets/admin/quests/Quests";
+import { WatchAdBack } from "./componets/admin/watchadback/WatchAdBack";
+import { AdminReg } from "./componets/admin/adminreg/AdminReg";
+import { Welcome } from "./componets/admin/Welcome/Welcome";
+import { AdminLog } from "./componets/admin/adminlog/adminlog";
+import { PreviousQuiz } from "./componets/admin/previousquiz/PreviousQuiz";
+import { AddQuiz } from "./componets/admin/addquiz/AddQuiz";
+import { Done } from "./componets/admin/done/Done";
+import { Aboutquiz } from "./componets/admin/aboutquiz/Aboutquiz";
+import { ListOfQuest } from "./componets/admin/listofquest/ListOfQuest";
+import { QuestionView } from "./componets/admin/QuestionView/QuestionView";
+import { Qr } from "./componets/admin/qr/Qr";
+import { Leaderboard } from "./componets/client/LeaderBoard/LeaderBoard";
 
 const router = createBrowserRouter([
   {
-    path:'/app',
-    element:<App />
+    path: "/app",
+    element: <App />,
   },
   {
-    path:'/home',
-    element:
-    <Fade in>
-    <div>
-      <Home/>
-    </div>
-    </Fade>
+    path: "/home",
+    element: (
+      <Fade in>
+        <div>
+          <Home />
+        </div>
+      </Fade>
+    ),
   },
   {
-    path: '/',
-    element: <AdminLog/>
-  },
-  
-  {
-    path: '/questions/:id',
-    element: <Fade in timeout={2000}>
-      <div>
-        <Questions/>
-      </div>
-    </Fade>
+    path: "/",
+    element: <AdminLog />,
   },
   {
-    path: '/answer/:id',
-    element:
-    <Fade in timeout={1000}>  
-      <div>
-        <Answer/>
-      </div>
-    </Fade>
+    path: "/AddQuestion",
+    element: <AddQuestion />,
   },
   {
-    path: '/wait',
-    element: <Wait/>
+    path: "/Quests",
+    element: <Quests />,
   },
   {
-    path: '/winner',
-    element: <Winner/>
+    path: "/WatchAdBack",
+    element: <WatchAdBack />,
   },
   {
-    path: '/AddQuestion',
-    element: <AddQuestion/>
+    path: "/Adminreg",
+    element: <AdminReg />,
   },
   {
-    path: '/Quests',
-    element: <Quests/>
+    path: "/Welcome",
+    element: <Welcome />,
   },
   {
-    path: '/WatchAdBack',
-    element: <WatchAdBack/>
+    path: "/Adminlog",
+    element: <AdminLog />,
   },
   {
-    path: '/Adminreg',
-    element: <AdminReg/>
+    path: "/PreviousQuiz",
+    element: <PreviousQuiz />,
   },
   {
-    path: '/Welcome',
-    element: <Welcome/>
+    path: "/AddQuiz",
+    element: <AddQuiz />,
   },
   {
-    path: '/Adminlog',
-    element: <AdminLog/>
+    path: "/:quiz_id/Done",
+    element: <Done />,
   },
   {
-    path: '/PreviousQuiz',
-    element: <PreviousQuiz/>
+    path: "/editor",
+    element: <AddQuestion />,
   },
   {
-    path: '/AddQuiz',
-    element: <AddQuiz/>
+    path: "/aboutquiz",
+    element: <Aboutquiz />,
   },
   {
-    path: '/Done',
-    element: <Done/>
+    path: "/:quiz_id/listofquest",
+    element: <ListOfQuest />,
   },
   {
-    path: "/editor", 
-  element: <AddQuestion />
+    path: "/:quiz_id/questionview/:question_number",
+    element: <QuestionView />,
   },
   {
-    path: '/aboutquiz',
-    element: <Aboutquiz/>
+    path: "/:quiz_id/qr",
+    element: <Qr />,
   },
-  {
-    path: '/listofquest',
-    element: <ListOfQuest/>
-  }
 
+  // client
+  {
+    path: "/quiz/:quiz_id/game/:game_id",
+    element: <Home />,
+  },
+  {
+    path: "/quiz/:quiz_id/wait",
+    element: <Wait />,
+  },
+  {
+    path: "/quiz/:quiz_id/question/:question_id",
+    element: (
+      <Fade in timeout={2000}>
+        <div>
+          <Questions />
+        </div>
+      </Fade>
+    ),
+  },
+  {
+    path: "/quiz/:quiz_id/question/:question_id/answer",
+    element: (
+      <Fade in timeout={1000}>
+        <div>
+          <Answer />
+        </div>
+      </Fade>
+    ),
+  },
+  {
+    path: "/quiz/:quiz_id/winner",
+    element: <Winner />,
+  },
+  {
+    path: "/leaderboard",
+    element: <Leaderboard />,
+  },
+]);
 
-])
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </StyledEngineProvider>
   </React.StrictMode>
 );
-
-

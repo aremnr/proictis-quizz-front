@@ -1,0 +1,270 @@
+.bg {
+  background-image: url("/public/bgadmin.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Занимает всю высоту окна */
+  display: flex;
+  justify-content: center; /* Выравнивание по центру по горизонтали */
+  align-items: center; /* Выравнивание по центру по вертикали */
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.questionViewContainer {
+  display: flex; /* Расположить элементы в ряд */
+  justify-content: space-between; /* Раздвигает элементы влево и вправо */
+  padding: 20px; /* Добавим отступы для красоты */
+  height: auto;
+}
+
+.questionViewContainer button {
+  align-self: flex-start; /* Разместить кнопку "Назад" вверху слева */
+  margin-right: 20px; /* Добавим отступ справа */
+}
+
+.questionsContainer {
+  width: 33%; /* Уменьшаем ширину контейнера для вопросов до 30% */
+  height: 100%;
+  align-self: flex-start; /* Разместить компонент в начале страницы по вертикали */
+}
+
+body {
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.bgimage {
+  background-image: url("/public/question.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh; /* Используем min-height вместо height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы для родительского контейнера */
+  overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
+}
+.button {
+  position: relative;
+  background: linear-gradient(180deg, #e73bcc 0%, #342181 100%);
+  border-radius: 60px;
+  top: 300px;
+  width: 153px;
+  height: 80px;
+  border: 1px solid #000000;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 24px;
+  font-family: "Yellowtail";
+}
+.answers {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0%;
+  margin-top: 10px;
+  padding-top: 20px;
+}
+.answer {
+  margin-bottom: 20px;
+  width: 280px;
+  height: 58px;
+  border-radius: 15px;
+  border: 2px solid;
+  background-color: #d9d9d9;
+  font-size: 22px;
+  color: black;
+}
+
+.answer:hover {
+  background-color: #9e00ac; /* Цвет при наведении */
+}
+
+.selected {
+  background-color: #a9a9a9; /* Цвет при нажатии */
+}
+
+.photo {
+  width: 150px;
+  height: 150px;
+  margin: 0;
+}
+.elements {
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+.question {
+  position: relative;
+  font-size: larger;
+  font-weight: 500;
+  margin-bottom: 17px;
+  font-size: 24px;
+  margin-top: 10px;
+}
+.questPhoto {
+  margin-top: 10px;
+}
+
+.ava {
+  padding-top: 70px;
+  width: 52px;
+  height: 52px;
+  margin-top: auto;
+}
+.inputText {
+  border-radius: 30px;
+  width: 344px;
+  height: 150px;
+  border: 1.5px solid black;
+  text-align: center;
+  font-size: larger;
+  background-color: #d9d9d9;
+}
+
+.outerContainer {
+  position: absolute; /* Располагаем элемент в абсолютном положении */
+  /* Прижимаем к верхней части экрана */
+  right: 0; /* Прижимаем к правой части экрана */
+  height: 500px;
+  width: 24%; /* Опционально, можно задать ширину для контейнера */
+  display: flex;
+  margin-right: 14%;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.outerContainer2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.innerContainer {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 70px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  width: 83%;
+  text-align: center;
+  margin: 20px 0;
+}
+.innerContainer2 {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 70px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+  text-align: center;
+  margin: 20px 0;
+  box-sizing: border-box;
+  width: 93%;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.toAnswer {
+  font-size: 25px;
+  color: #ffffff;
+  background: linear-gradient(30deg, #e43db6, #6c277d);
+  border-radius: 30px;
+  width: 60%;
+  height: 84px;
+  border: 0cap;
+  animation: gradientAnimation 2.3s ease infinite;
+  background-size: 200% 200%;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.answers2 {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 0%;
+  margin-top: 30px;
+}
+
+.timerpadding {
+  margin-top: 30px;
+}
+
+.backButton {
+  position: absolute;
+  left: 25%; /* Отступ от левого края */
+  top: 50%; /* Позиционирование посередине экрана */
+  transform: translateY(-50%); /* Центрирование по вертикали */
+  z-index: 1000; /* Устанавливаем, чтобы кнопка была выше остальных элементов */
+  margin-bottom: 20px;
+  width: 20%;
+  height: 58px;
+  border-radius: 15px;
+
+  background-color: #d9d9d9;
+  font-size: 20px;
+  color: black;
+}
+
+.topButton {
+  position: absolute;
+  top: 5%; /* Позиция сверху */
+  right: 0; /* Центрирование относительно экрана */
+  margin-right: 27%;
+  transform: translateX(50%); /* Центрирование кнопки относительно контейнера */
+  z-index: 1002; /* Чтобы кнопка была поверх всего остального */
+  width: 332px;
+  height: 58px;
+  border-radius: 15px;
+
+  background-color: #d9d9d9;
+  font-size: 32px;
+  color: black;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  z-index: 0; /* Чтобы был под кнопкой и содержимым, но над фоном */
+}
+
+.correct {
+  background-color: green;
+  border-color: black; /* Зеленая граница для правильного ответа */
+  border-width: 4px; /* Увеличенная толщина границы */
+}
+
+.incorrect {
+  background-color: red;
+  border-color: black; /* Красная граница для неправильного ответа */
+  border-width: 4px; /* Увеличенная толщина границы */
+}
+
+.correct:hover {
+  background-color: green;
+}
+
+.incorrect:hover {
+  background-color: red;
+}

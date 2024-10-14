@@ -18,17 +18,15 @@ export function Aboutquiz() {
       alert('Пожалуйста, заполните поле с названием');
       return;
     }
-
-    // Создаем уникальный id для нового квиза
-    const id = Date.now(); // Используем временную метку в качестве уникального идентификатора
-    const newQuiz = { id, title: name, description }; // Создаем объект квиза
-
-    // Получаем текущий список квизов из localStorage
-    const savedQuizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
-    savedQuizzes.push(newQuiz); // Добавляем новый квиз в список
-    localStorage.setItem('quizzes', JSON.stringify(savedQuizzes)); // Сохраняем обновленный список в localStorage
-
-    navigate('/AddQuestion', { state: { maxQuestions: location.state.maxQuestions } }); // Перенаправляем на страницу добавления вопросов
+  
+    navigate('/AddQuestion', { 
+      state: { 
+        maxQuestions: location.state.maxQuestions, 
+        time: location.state.time, 
+        title: name, 
+        description 
+      } 
+    });
   };
 
   return (

@@ -360,3 +360,9 @@ background-size: 200% 200%;
   background-color: transparent; /* Фон по умолчанию */
   accent-color: #9100a4; /* Фиолетовый фон при выборе */
 }
+
+.error {
+  color: red;
+  font-size: 12px; /* Уменьшаем размер шрифта */
+  margin-bottom: 5px; /* Добавляем отступ снизу, чтобы отделить от поля ввода */
+}

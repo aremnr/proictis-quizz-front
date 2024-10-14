@@ -55,9 +55,18 @@ export function AdminLog() {
         localStorage.setItem("access_token", response.data.access_token);
         navigate("/Welcome");
       })
-      .catch(function (error) {
-        alert('Доступ запрещен')
-        console.log(error);
+      .catch((error) => {
+        if (error.response) {
+          console.error("Error response:", error.response.data);
+          alert("Ошибка: " + error.response.data);
+        } else if (error.request) {
+          console.error("Error request:", error.request);
+          alert("Ошибка: Сервер не отвечает.");
+        } else {
+          console.error("Error message:", error.message);
+          alert("Ошибка: " + error.message);
+        }
+        console.error("Full error object:", error);
       });
   };
 

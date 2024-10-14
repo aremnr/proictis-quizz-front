@@ -1,26 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './addquestion.module.css';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styles from "./addquestion.module.css";
+import axios from "axios";
 
 export function AddQuestion() {
-  const location = useLocation()
-  const maxQuestions = location.state.maxQuestions
-  const [questions, setQuestions] = useState([{ text: '', answers: ['', '', '', '', ''], points: 1, correctAnswerIndices: [] }]);
+  const location = useLocation();
+  const maxQuestions = location.state.maxQuestions;
+  const [questions, setQuestions] = useState([
+    { text: "", answers: [""], points: 1, correctAnswerIndices: [] },
+  ]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [errors, setErrors] = useState({ textError: "", answerErrors: [""] }); // Статус ошибок
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem("access_token");
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [quizId, setQuizId] = useState(null);
+
+  if (!accessToken) {
+    alert("Требуется авторизация");
+    return;
+  }
 
   const handleInputChange = (index, event) => {
     const newQuestions = [...questions];
     newQuestions[currentQuestion].answers[index] = event.target.value;
     setQuestions(newQuestions);
+
+    // Сброс ошибки для текущего ответа
+    const newAnswerErrors = [...errors.answerErrors];
+    newAnswerErrors[index] = "";
+    setErrors({ ...errors, answerErrors: newAnswerErrors });
   };
 
   const addAnswerField = () => {
     const newQuestions = [...questions];
     if (newQuestions[currentQuestion].answers.length < 5) {
-      newQuestions[currentQuestion].answers.push('');
+      newQuestions[currentQuestion].answers.push("");
       setQuestions(newQuestions);
+
+      // Добавляем пустую ошибку для нового поля
+      setErrors({ ...errors, answerErrors: [...errors.answerErrors, ""] });
     }
   };
 
@@ -28,6 +48,9 @@ export function AddQuestion() {
     const newQuestions = [...questions];
     newQuestions[currentQuestion].text = event.target.value;
     setQuestions(newQuestions);
+
+    // Сброс ошибки для текста вопроса
+    setErrors({ ...errors, textError: "" });
   };
 
   const handlePointsChange = (event) => {
@@ -37,27 +60,85 @@ export function AddQuestion() {
   };
 
   const handleNextClick = () => {
-    console.log(currentQuestion, maxQuestions)
-    if (isLastQuestion || currentQuestion + 1 >= maxQuestions) {
+    const currentQ = questions[currentQuestion];
+    let hasError = false;
+
+    if (!currentQ.text) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        textError: "Пожалуйста, введите текст вопроса",
+      }));
+      hasError = true;
+    }
+
+    const newAnswerErrors = currentQ.answers.map((answer) =>
+      answer.trim() === "" ? "Пожалуйста, заполните этот вариант ответа" : ""
+    );
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      answerErrors: newAnswerErrors,
+    }));
+
+    if (newAnswerErrors.some((error) => error !== "")) {
+      hasError = true;
+    }
+
+    if (currentQ.correctAnswerIndices.length === 0) {
+      hasError = true;
+      alert("Пожалуйста, выберите хотя бы один правильный ответ");
+    }
+
+    if (hasError) {
+      return;
+    }
+
+    if (currentQuestion + 1 >= maxQuestions || isLastQuestion) {
       const quizData = {
-        questions: questions,
+        title: location.state.title,
+        description: location.state.description || "",
+        timer: location.state.time,
+        questions: questions.slice(0, maxQuestions).map((q) => ({
+          question: q.text,
+          points: q.points,
+          answers: q.answers.map((a, index) => ({
+            text: a,
+            correct:
+              Array.isArray(q.correctAnswerIndices) &&
+              q.correctAnswerIndices.includes(index),
+          })),
+        })),
       };
-      localStorage.setItem('quizData', JSON.stringify(quizData));
-      navigate('/done', { state: { maxQuestions } });
+
+      axios
+        .post("https://quiz.dev.schtil.com/quiz/add", quizData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          const quizId = response.data; // Сервер возвращает quizId как строку
+          setQuizId(quizId); // Сохраняем quizId в стейт
+          console.log("Quiz id:", quizId); // Проверим, что quizId корректно сохранился
+          alert("Квиз успешно создан!");
+          navigate(`/${quizId}/done`, { state: { maxQuestions, quizId } }); // Передаем quizId при навигации
+        })
+        .catch((error) => {
+          console.error("Ошибка при создании квиза:", error);
+        });
     } else {
-      const newQuestion = { text: '', answers: ['', '', '', '', ''], points: 1, correctAnswerIndices: [] };
-      setQuestions([...questions, newQuestion]);
+      if (questions.length < maxQuestions) {
+        const newQuestion = {
+          text: "",
+          answers: [""],
+          points: 1,
+          correctAnswerIndices: [],
+        };
+        setQuestions([...questions, newQuestion]);
+      }
       setCurrentQuestion(currentQuestion + 1);
     }
   };
-
-  useEffect(() => {
-    const savedQuiz = localStorage.getItem('quizData');
-    if (savedQuiz) {
-      const quizData = JSON.parse(savedQuiz);
-      setQuestions(quizData.questions);
-    }
-  }, []);
 
   const handleBackClick = () => {
     if (currentQuestion > 0) {
@@ -73,29 +154,42 @@ export function AddQuestion() {
 
   const handleCorrectAnswerChange = (index) => {
     const newQuestions = [...questions];
-    const correctAnswers = newQuestions[currentQuestion].correctAnswerIndices || [];
-
-    console.log('Before:', correctAnswers);
+    const correctAnswers =
+      newQuestions[currentQuestion].correctAnswerIndices || [];
 
     if (correctAnswers.includes(index)) {
-      newQuestions[currentQuestion].correctAnswerIndices = correctAnswers.filter(i => i !== index);
+      newQuestions[currentQuestion].correctAnswerIndices =
+        correctAnswers.filter((i) => i !== index);
     } else {
-      newQuestions[currentQuestion].correctAnswerIndices = [...correctAnswers, index];
+      newQuestions[currentQuestion].correctAnswerIndices = [
+        ...correctAnswers,
+        index,
+      ];
     }
-
-    console.log('After:', newQuestions[currentQuestion].correctAnswerIndices);
     setQuestions(newQuestions);
-
-    console.log(questions)
   };
 
   return (
     <div className={styles.bg}>
+      {successAlert && (
+        <div className={styles.alert}>
+          <p>Квиз успешно создан! Нажмите Enter для подтверждения.</p>
+          <button
+            onClick={() => setSuccessAlert(false)}
+            className={styles.alertButton}
+          >
+            OK
+          </button>
+        </div>
+      )}
+
       <div className={styles.OuterContainer}>
         <div className={styles.InnerContainer}>
           <h2 className={styles.header}>Создание вопросов</h2>
           <p className={styles.timerHint}>Вопрос №{currentQuestion + 1}</p>
-
+          {errors.textError && (
+            <p className={styles.error}>{errors.textError}</p>
+          )}
           <input
             type="text"
             placeholder="введите текст вопроса"
@@ -103,11 +197,16 @@ export function AddQuestion() {
             onChange={handleQuestionTextChange}
             className={styles.nameInput}
           />
+          {/* Ошибка для текста вопроса */}
 
           <div className={styles.variants}>
             <div className={styles.answersContainer}>
               {questions[currentQuestion].answers.map((answer, index) => (
                 <div key={index} className={styles.answerOption}>
+                  {errors.answerErrors[index] && (
+                    <p className={styles.error}>{errors.answerErrors[index]}</p>
+                  )}{" "}
+                  {/* Ошибка отображается над полем */}
                   <label className={styles.inputContainer}>
                     <input
                       type="text"
@@ -117,20 +216,38 @@ export function AddQuestion() {
                       className={styles.variantsInput}
                     />
                     <input
-                      type="checkbox" // Измените на checkbox для множественного выбора
-                      checked={questions[currentQuestion].correctAnswerIndices?.includes(index) || false} // Добавляем || false для безопасности
-                      onChange={() => handleCorrectAnswerChange(index)} // Установка правильного ответа
-                      className={`${styles.checkmark} ${questions[currentQuestion].correctAnswerIndices?.includes(index) ? styles.selected : ''}`} // Добавьте класс для стилей
+                      type="checkbox"
+                      checked={
+                        questions[
+                          currentQuestion
+                        ].correctAnswerIndices?.includes(index) || false
+                      }
+                      onChange={() => handleCorrectAnswerChange(index)}
+                      className={`${styles.checkmark} ${
+                        questions[
+                          currentQuestion
+                        ].correctAnswerIndices?.includes(index)
+                          ? styles.selected
+                          : ""
+                      }`}
                     />
                   </label>
                 </div>
               ))}
             </div>
             {questions[currentQuestion].answers.length < 5 && (
-              <button className={styles.addAnswerButton} onClick={addAnswerField}>+ 1 вариант ответа</button>
+              <button
+                className={styles.addAnswerButton}
+                onClick={addAnswerField}
+              >
+                + 1 вариант ответа
+              </button>
             )}
           </div>
-          <p className={styles.timerHint}>укажите количество баллов за этот вопрос</p>
+
+          <p className={styles.timerHint}>
+            укажите количество баллов за этот вопрос
+          </p>
           <input
             type="number"
             title="Укажите количество баллов за этот вопрос"
@@ -155,7 +272,7 @@ export function AddQuestion() {
             </button>
           </div>
           <button className={styles.backButton} onClick={handleBackClick}>
-            &#8592; 
+            &#8592;
           </button>
         </div>
       </div>
