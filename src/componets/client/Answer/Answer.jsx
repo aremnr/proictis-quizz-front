@@ -9,6 +9,8 @@ export function Answer() {
   const questionId = parseInt(id, 10); // Преобразуем id в число
   const navigate = useNavigate();
   const location = useLocation();
+  const rightAnswer = location.state?.rightAnswer;
+  console.log("right answer: ", rightAnswer);
   console.log(answerText);
 
   if (!currentQuestion) {
@@ -36,7 +38,7 @@ export function Answer() {
                 <button
                   key={index}
                   className={
-                    answer === currentQuestion.rightanswer
+                    index === rightAnswer
                       ? styles.answerRight
                       : styles.answerWrong
                   }

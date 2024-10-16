@@ -7,12 +7,13 @@ import axios from "axios";
 export let ws;
 export let quiz;
 export let currentQuestion;
-export let currentUser;
-export let users;
+let startResultsReady = false;
+export let users = [];
 
 export function Home() {
   const [quizData, setQuizData] = useState(null);
   const [username, setUsername] = useState(""); // Состояние для имени пользователя
+  // const [users, setUsers] = useState([]);
   const navigate = useNavigate(); // Инициализируем хук useNavigate
   const { quiz_id, game_id } = useParams();
 
@@ -50,7 +51,21 @@ export function Home() {
       console.log("event: ", event);
 
       if (event.data === "end_game") {
-        // navigate(`/quiz/${quiz_id}/winner`);
+        return;
+      }
+      if (event.data.startsWith("empty")) {
+        return;
+      }
+
+      if (event.data === "start_results") {
+        startResultsReady = true;
+        console.log("set flag: ", startResultsReady);
+        return;
+      }
+
+      if (event.data === "end_results") {
+        users.sort((a, b) => b.points - a.points);
+        navigate(`/quiz/${quiz_id}/winner`, { state: { users } });
         return;
       }
 
@@ -58,17 +73,27 @@ export function Home() {
       console.log("parsed: ", parsed);
       console.log("header: ", parsed["header"]);
 
+      if (Number.isInteger(parsed)) {
+        // answer index
+        console.log("ZOV ELEPHANTS!: ", parsed);
+
+        navigate(`/quiz/${quiz_id}/question/${currentQuestion.id}/answer`, {
+          state: { rightAnswer: parsed },
+        });
+        return;
+      }
+
       if (!parsed[`header`]) {
         currentQuestion = parsed;
         navigate(`/quiz/${quiz_id}/question/${currentQuestion.id}`, {
           state: { data: currentQuestion },
         });
-      } else if (parsed["header"] === "users") {
-        currentUser = parsed;
-      } else if (parsed.header === "check_answer") {
-        navigate(`/quiz/${quiz_id}/question/${currentQuestion.id}/answer`, {
-          state: { answerText: parsed.Answer },
+      } else if (parsed["header"] === "users" && startResultsReady) {
+        users.push({
+          username: parsed.username,
+          points: parsed.points,
         });
+        console.log("added user: ", users);
       }
     };
   }
@@ -85,7 +110,7 @@ export function Home() {
 
     ws.send(username);
 
-    navigate(`/quiz/${quiz_id}/wait`, { state: quizData });
+    navigate(`/quiz/${quiz_id}/wait`);
   };
   return (
     <div>

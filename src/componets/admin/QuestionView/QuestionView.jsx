@@ -83,53 +83,54 @@ export function QuestionView() {
 
   return (
     <div className={styles.bg}>
-      <div className={styles.overlay}></div>
+      <div className={styles.main}>
+        <div className={styles.overlay}></div>
 
-      <Button
-        variant="contained"
-        color="secondary"
-        className={styles.backButton}
-        onClick={handleBackClick}
-      >
-        вернуться списку
-      </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={styles.backButton}
+          onClick={handleBackClick}
+        >
+          вернуться списку
+        </Button>
 
-      {/* Кнопка с динамическим текстом вопроса */}
-      <Button
-        variant="contained"
-        color="secondary"
-        className={styles.topButton}
-      >
-        Вопрос {question_number}
-      </Button>
+        {/* Кнопка с динамическим текстом вопроса */}
+        <Button
+          variant="contained"
+          color="secondary"
+          className={styles.topButton}
+        >
+          Вопрос {question_number}
+        </Button>
 
-      <div className={styles.outerContainer}>
-        <div className={styles.innerContainer}>
-          <div className={styles.elements}>
-            <p className={styles.question}>{questionData.question_text}</p>
-            <div className={styles.questPhoto}>
-              <img
-                className={styles.photo}
-                src="/thinkingface.png"
-                alt="Gubka"
-              />
-            </div>
-            {timer !== 0 && (
-              <div className={styles.timerpadding1}>
-                <Timer
-                  key={question_number}
-                  seconds={timer}
-                  onTimerEnd={handleTimerEnd}
+        <div className={styles.outerContainer}>
+          <div className={styles.innerContainer}>
+            <div className={styles.elements}>
+              <p className={styles.question}>{questionData.question_text}</p>
+              <div className={styles.questPhoto}>
+                <img
+                  className={styles.photo}
+                  src="/thinkingface.png"
+                  alt="Gubka"
                 />
               </div>
-            )}
-            <div className={styles.answers}>
-              {questionData.answers_list.list.map((answer, index) => (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  key={index}
-                  className={`${styles.answer} 
+              {timer !== 0 && (
+                <div className={styles.timerpadding1}>
+                  <Timer
+                    key={question_number}
+                    seconds={timer}
+                    onTimerEnd={handleTimerEnd}
+                  />
+                </div>
+              )}
+              <div className={styles.answers}>
+                {questionData.answers_list.list.map((answer, index) => (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    key={index}
+                    className={`${styles.answer} 
                   ${selectedAnswer === index ? styles.selected : ""}
                   ${
                     selectedAnswer === index && isRight && checking
@@ -142,19 +143,20 @@ export function QuestionView() {
                         : ""
                     }
                 `}
-                  onClick={() => handleAnswerClick(index)}
-                >
-                  {answer.answer_text}
-                </Button>
-              ))}
+                    onClick={() => handleAnswerClick(index)}
+                  >
+                    {answer.answer_text}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className={styles.avatarperson}>
-            <img className={styles.ava} src="/ava2.png" alt="avatar" />
-            <img className={styles.ava} src="/ava3.png" alt="avatar" />
-            <img className={styles.ava} src="/ava.png" alt="avatar" />
-            <img className={styles.ava} src="/ava5.png" alt="avatar" />
-            <img className={styles.ava} src="/ava4.png" alt="avatar" />
+            <div className={styles.avatarperson}>
+              <img className={styles.ava} src="/ava2.png" alt="avatar" />
+              <img className={styles.ava} src="/ava3.png" alt="avatar" />
+              <img className={styles.ava} src="/ava.png" alt="avatar" />
+              <img className={styles.ava} src="/ava5.png" alt="avatar" />
+              <img className={styles.ava} src="/ava4.png" alt="avatar" />
+            </div>
           </div>
         </div>
       </div>

@@ -136,7 +136,7 @@ const router = createBrowserRouter([
     element: <Winner />,
   },
   {
-    path: "/leaderboard",
+    path: "/quiz/:quiz_id/leaderboard",
     element: <Leaderboard />,
   },
 ]);

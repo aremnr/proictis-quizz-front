@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./questionstyle.module.css";
 import { Timer } from "../Timer/timer1/Timer";
 import Button from "@mui/material/Button";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ws, quiz, currentQuestion } from "../Home/Home";
 
 export function Questions() {
   const navigate = useNavigate();
+  const [isBlocked, setIsBlocked] = useState(false);
   const location = useLocation();
   const { quiz_id } = useParams();
   const data = location.state.data;
@@ -23,17 +24,20 @@ export function Questions() {
   }
 
   const handleAnswerClick = (index) => {
+    setSelectedAnswer(index);
     console.log("answer_index + 1: ", index + 1);
     const headers = { type: "check_answer" };
     index++;
     ws.send(JSON.stringify({ headers, index }));
-    setSelectedAnswer(index);
-    navigate(`/quiz/${quiz_id}/question/${currentQuestion.id}/answer`);
+    setIsBlocked(true);
+    // navigate(`/quiz/${quiz_id}/question/${currentQuestion.id}/answer`);
   };
 
   const handleTimerEnd = () => {
-    // Переходим на страницу с ответом для текущего вопроса
-    // navigate(`answer/${id}`);
+    if (quiz.timer === 0) {
+      return;
+    }
+    setIsBlocked(true);
   };
 
   return (
@@ -50,13 +54,15 @@ export function Questions() {
                   alt="Gubka"
                 />
               </div>
-              <div className={styles.timerpadding1}>
-                <Timer
-                  key={quiz_id}
-                  seconds={quiz.timer}
-                  onTimerEnd={handleTimerEnd}
-                />
-              </div>
+              {quiz.timer !== 0 && (
+                <div className={styles.timerpadding1}>
+                  <Timer
+                    key={quiz_id}
+                    seconds={quiz.timer}
+                    onTimerEnd={handleTimerEnd}
+                  />
+                </div>
+              )}
               <div className={styles.answers}>
                 {data.answers_list.list.map((answer, index) => (
                   <Button
@@ -67,6 +73,7 @@ export function Questions() {
                       selectedAnswer === index ? styles.selected : ""
                     }`}
                     onClick={() => handleAnswerClick(index)}
+                    disabled={isBlocked}
                   >
                     {answer.answer_text}
                   </Button>

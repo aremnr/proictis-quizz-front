@@ -1,14 +1,18 @@
 import styles from "./winner.module.css";
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import RankingItem from "./ranking/RankingItem";
-import { ws } from "../Home/Home";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export function Winner() {
-  useEffect(() => {
-    // const headers = { type: "game" };
-    // ws.send(JSON.stringify({ headers }));
-  });
+  const { quiz_id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const users = location.state.users;
+
+  const handleResults = () => {
+    navigate(`/quiz/${quiz_id}/leaderboard`, { state: { users } });
+  };
 
   return (
     <div>
@@ -19,27 +23,34 @@ export function Winner() {
               <img src="/crown.png" alt="Image" className={styles.avatar1} />
               <p>Победитель!</p>
               <img src="/ava4.png" alt="Image" className={styles.avatar} />
-              <p>Гейзенберг</p>
+              <p>
+                {users[0] !== undefined ? users[0].username : "Неизвестный"}
+              </p>
             </div>
-            <div className={styles.RankingContainer}>
-              <RankingItem
-                imageUrl="/2ndplace.png"
-                position={2}
-                name="Потапыч"
-              />
-            </div>
-            <div className={styles.RankingContainer}>
-              <RankingItem
-                imageUrl="/3rdplace.png"
-                position={3}
-                name="Бэтмен"
-              />
-            </div>
+            {users[1] !== undefined && (
+              <div className={styles.RankingContainer}>
+                <RankingItem
+                  imageUrl="/2ndplace.png"
+                  position={2}
+                  name={users[1].username}
+                />
+              </div>
+            )}
+            {users[2] !== undefined && (
+              <div className={styles.RankingContainer}>
+                <RankingItem
+                  imageUrl="/3rdplace.png"
+                  position={3}
+                  name={users[2].username}
+                />
+              </div>
+            )}
             <div className={styles.buttonresults}>
               <Button
                 variant="contained"
                 color="secondary"
                 className={styles.results}
+                onClick={handleResults}
               >
                 {" "}
                 Итоги

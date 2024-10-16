@@ -12,11 +12,13 @@ export function Qr() {
   const location = useLocation();
   const navigate = useNavigate();
   const [qrcode, setQrcode] = useState("");
+  const [isBlocked, setIsBlocked] = useState(1);
   const [ws, setWs] = useState(null);
   const [answer, setAnswer] = useState(null);
+  const [gameMessage, setGameMessage] = useState("Начать игру!");
   const [connectedUsers, setConnectedUsers] = useState([]);
   const { quiz_id } = useParams();
-  const productionPrefix = "https://quiz.dev.schtil.com/log";
+  const productionPrefix = "https://quiz.schtil.com";
   const localPrefix = "http://localhost:3000";
   const accessToken = localStorage.getItem("access_token");
   const maxQuestions = location.state?.maxQuestions;
@@ -36,7 +38,7 @@ export function Qr() {
         console.log(response.data);
         const gameId = response.data.game_id;
 
-        const urlToEncode = `${localPrefix}/quiz/${quiz_id}/game/${gameId}`;
+        const urlToEncode = `${window.location.host}/quiz/${quiz_id}/game/${gameId}`;
         console.log("decoded url: ", urlToEncode);
 
         qr.toDataURL(urlToEncode, function (err, url) {
@@ -58,22 +60,33 @@ export function Qr() {
   };
 
   const handleSubmit = () => {
-    const headers = { type: "game" };
-    ws.send(JSON.stringify({ headers }));
-    console.log("game is started!");
-    // navigate("/AddQuestion");
+    setAnswer(null);
+    setIsBlocked(isBlocked === 0 ? 1 : 0);
+    if (gameMessage === "Начать игру!") {
+      console.log("game is started!");
+      const headers = { type: "game" };
+      ws.send(JSON.stringify({ headers }));
+      setGameMessage("Следующий вопрос");
+      return;
+    } else if (gameMessage === "Следующий вопрос") {
+      console.log("next answer!");
+      const headers = { type: "game" };
+      ws.send(JSON.stringify({ headers }));
+      return;
+    } else if (gameMessage === "Закончить игру!") {
+      setIsBlocked(2);
+      console.log("[qr] кнопка закончить игру!");
+      const headers = { type: "end_game" };
+      ws.send(JSON.stringify({ headers }));
+      return;
+    }
   };
 
   const handleGetAnswer = () => {
+    setIsBlocked(isBlocked === 0 ? 1 : 0);
     const headers = { type: "get_answer" };
     ws.send(JSON.stringify({ headers }));
     console.log("game get answers!");
-  };
-
-  const handleEndGame = () => {
-    const headers = { type: "end_game" };
-    ws.send(JSON.stringify({ headers }));
-    console.log("game end!");
   };
 
   if (!ws) {
@@ -90,13 +103,27 @@ export function Qr() {
     console.log("event: ", event);
     console.log("Сообщение от сервера:", event.data);
 
-    if (event.data === "results" || event.data === "end_game") {
+    if (
+      event.data === "results" ||
+      event.data.startsWith("empty") ||
+      event.data === "start_results" ||
+      event.data === "end_results"
+    ) {
+      return;
+    }
+
+    if (event.data === "end_game") {
+      console.log("end game event!");
+      setGameMessage("Закончить игру!");
       return;
     }
 
     const message = JSON.parse(event.data);
     console.log("parsed: ", message);
 
+    if (message.header && gameMessage === "Закончить игру!") {
+      return;
+    }
     if (message.header === "users") {
       users.push({
         username: message.username,
@@ -114,7 +141,6 @@ export function Qr() {
       } else {
         console.log("User not found");
       }
-      setConnectedUsers(users);
     } else if (message.header === "Answer_check") {
       setAnswer(message.Answer);
       answerText = message.Answer;
@@ -137,26 +163,20 @@ export function Qr() {
             color="secondary"
             className={styles.buttonstart}
             onClick={handleSubmit}
+            disabled={isBlocked === 0 || isBlocked === 2}
           >
-            Начать игру!
+            {gameMessage}
           </Button>
           <Button
             variant="contained"
             color="secondary"
             className={styles.buttonstart}
             onClick={handleGetAnswer}
+            disabled={isBlocked === 1 || isBlocked === 2}
           >
             Показать ответ нам!
           </Button>
           {answer && <div>Ответ на вопрос: {answer}</div>}
-          <Button
-            variant="contained"
-            color="secondary"
-            className={styles.buttonstart}
-            onClick={handleEndGame}
-          >
-            Закончить игру для петушни!
-          </Button>
           {/* Контейнер для списка пользователей */}
           <div className={styles.userListContainer}>
             <h3>Список подключившихся пользователей:</h3>

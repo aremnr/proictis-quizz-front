@@ -23,10 +23,13 @@ export function AddQuiz() {
       return;
     }
 
+    // Check if the timer is enabled or disabled
+    console.log(isTimerEnabled ? "Таймер включен" : "Таймер отключен");
+
     navigate("/aboutquiz", {
       state: {
         maxQuestions,
-        time: isTimerEnabled ? time : null, // Передаем таймер только если он включен
+        time: isTimerEnabled ? time : 0, // Передаем таймер только если он включен
       },
     });
   };

@@ -124,7 +124,15 @@ export function AddQuestion() {
           navigate(`/${quizId}/done`, { state: { maxQuestions, quizId } }); // Передаем quizId при навигации
         })
         .catch((error) => {
-          console.error("Ошибка при создании квиза:", error);
+          if (error.response && error.response.data) {
+            console.error("Ошибка от сервера:", error.response.data);
+            // Выводим поле detail, чтобы увидеть сообщение
+            if (error.response.data.detail) {
+              console.error("Детали ошибки:", error.response.data.detail);
+            }
+          } else {
+            console.error("Ошибка при создании квиза:", error);
+          }
         });
     } else {
       if (questions.length < maxQuestions) {
