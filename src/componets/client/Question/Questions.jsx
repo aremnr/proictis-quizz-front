@@ -50,7 +50,7 @@ export function Questions() {
               <div className={styles.questPhoto}>
                 <img
                   className={styles.photo}
-                  src="/thinkingface.png"
+                  src="/thinkingfacegif.gif"
                   alt="Gubka"
                 />
               </div>
@@ -79,13 +79,6 @@ export function Questions() {
                   </Button>
                 ))}
               </div>
-            </div>
-            <div className={styles.avatarperson}>
-              <img className={styles.ava} src="/ava2.png" alt="avatar" />
-              <img className={styles.ava} src="/ava3.png" alt="avatar" />
-              <img className={styles.ava} src="/ava.png" alt="avatar" />
-              <img className={styles.ava} src="/ava5.png" alt="avatar" />
-              <img className={styles.ava} src="/ava4.png" alt="avatar" />
             </div>
           </div>
         </div>

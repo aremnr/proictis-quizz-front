@@ -10,7 +10,7 @@ body {
   background-image: url("/public/question.png");
   max-width: 100%;
   height: auto;
-  height: 100vh;
+  height: 120vh;
 }
 
 .answers {
@@ -30,24 +30,45 @@ body {
   background-color: #d9d9d9;
   color: #2b7e16;
   font-size: 18px;
+  margin-bottom: 20px;
+  width: 332px; /* Фиксированная ширина */
+  height: auto; /* Высота будет подстраиваться под содержимое */
+  padding: 10px 20px; /* Добавляем отступы для удобства */
+  border-radius: 15px;
+  border: 2px solid;
+  background-color: #d9d9d9;
+  font-size: 16px;
+  text-align: center;
+  transition: all 0.1s ease;
+  text-transform: none;
+  display: flex; /* Используем flexbox для центрирования текста */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
 }
 
 .answerWrong {
-  margin-bottom: 20px;
-  width: 332px;
-  height: 58px;
-  border-radius: 15px;
   border: 5px solid #e42014;
   background-color: #d9d9d9;
 
   color: #ba2020;
-  margin-bottom: 20px;
-  border: 2px solid;
-
-  font-size: 18px;
 
   text-align: center;
   transition: all 0.1s ease;
+  margin-bottom: 20px;
+  width: 332px; /* Фиксированная ширина */
+  height: auto; /* Высота будет подстраиваться под содержимое */
+  padding: 10px 20px; /* Добавляем отступы для удобства */
+  border-radius: 15px;
+  border: 2px solid;
+  background-color: #d9d9d9;
+  font-size: 16px;
+
+  text-align: center;
+  transition: all 0.1s ease;
+  text-transform: none;
+  display: flex; /* Используем flexbox для центрирования текста */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
 }
 
 .defaultButton {
@@ -78,7 +99,7 @@ body {
 }
 
 .questPhoto {
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .outercontainer2 {

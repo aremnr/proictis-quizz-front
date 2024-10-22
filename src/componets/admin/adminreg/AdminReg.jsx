@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import styles from "./adminreg.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios"; // Импортируем axios
 import MD5 from "crypto-js/md5";
 
@@ -12,6 +12,7 @@ export function AdminReg() {
   const [password, setPassword] = useState(""); // Состояние для пароля
   const [referralCode, setReferralCode] = useState(""); // Состояние для реферального кода
   const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false); // Состояние загрузки
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
@@ -41,7 +42,10 @@ export function AdminReg() {
       return;
     }
 
+    setLoading(true); // Включаем индикатор загрузки
+
     console.log(MD5(username).toString());
+
     axios
       .post(
         "https://quiz.dev.schtil.com/register",
@@ -62,10 +66,39 @@ export function AdminReg() {
         navigate("/Welcome");
       })
       .catch(function (error) {
-        alert("Неверный реферальный код");
-        console.log(error);
-        // console.log(error.response.data.detail);
-        // alert(error.response.data.detail);
+        console.log("Error response:", error?.response);
+        if (error?.response) {
+          console.log("Error response data:", error?.response.data);
+          if (error?.response?.status === 301) {
+            const newUrl = error?.response?.headers?.location;
+            if (newUrl) {
+              console.log("Redirecting to new URL:", newUrl);
+              return axios.post(
+                newUrl,
+                {
+                  username: username,
+                  password: password,
+                  email: MD5(username).toString() + "@test.com",
+                  referral_token: referralCode,
+                },
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+            } else {
+              console.error("Redirect location is undefined.");
+            }
+          } else {
+            alert("Ошибка: Неверный реферальный код или другие данные.");
+          }
+        } else {
+          console.error("Error without response:", error);
+        }
+      })
+      .finally(() => {
+        setLoading(false); // Отключаем индикатор загрузки
       });
   };
 
@@ -120,13 +153,14 @@ export function AdminReg() {
                   variant="contained"
                   color="secondary"
                   className={styles.buttonstart}
-                  onClick={handleSubmit} // Обработчик клика по кнопке
+                  onClick={handleSubmit}
+                  disabled={loading} // Обработчик клика по кнопке
                 >
-                  Создать аккаунт
+                  {loading ? "Создание..." : "Создать аккаунт"}
                 </Button>
               </div>
             </div>
-          </div>{" "}
+          </div>
           <button className={styles.backButton} onClick={handleBackClick}>
             &#8592;
           </button>

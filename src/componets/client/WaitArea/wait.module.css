@@ -1,68 +1,66 @@
-.bgimage{
-   background-image: url('/public/question.png');
-   background-size: cover;
-    background-position: center;
-    min-height: 100vh; /* Используем min-height вместо height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* Убираем отступы */
-    margin: 0; /* Убираем отступы для родительского контейнера */
-    overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
- 
- }
-
- .elements{
-   position: relative;
-   text-align:center;
-   padding-bottom: 140px;
-   
- }
-
-.text{
-   position: relative;
-   font-weight: 500;
-   
-   font-size: 32px;
-   color: white;
-   font-family: 'ZenMaruGothic';
-   font-weight: 400;
+.bgimage {
+  background-image: url("/public/question.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 120vh; /* Используем min-height вместо height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы для родительского контейнера */
+  overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
 }
-.ava{
-   padding-top: 40px;
-   width: 65px;
-   height: 65px;
-   margin-right: 12px;
- }
-.avatarPerson{
-   text-align: center;
+
+.elements {
+  position: relative;
+  text-align: center;
+  padding-bottom: 140px;
+}
+
+.text {
+  position: relative;
+  font-weight: 500;
+
+  font-size: 32px;
+  color: white;
+  font-family: "ZenMaruGothic";
+  font-weight: 400;
+}
+.ava {
+  padding-top: 40px;
+  width: 65px;
+  height: 65px;
+  margin-right: 12px;
+}
+.avatarPerson {
+  text-align: center;
 }
 
 @keyframes gradientAnimation {
-   0% {
-       background-position: 0% 50%;
-   }
-   50% {
-       background-position: 100% 50%;
-   }
-   100% {
-       background-position: 0% 50%;
-   }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.bar{
-   margin-top: 80px;
+.bar {
+  margin-top: 80px;
 }
 .gradientbar {
-   width: 100; /* ширина полосы */
-   height: 10px; /* высота полосы */
-   margin: 0 auto; /* центрирование */
-   border-radius: 10px; /* круглые края */
-   background: linear-gradient(90deg, #ffcbe4, #F31981);
-   background-size: 200% 200%;
-   animation: gradientAnimation 2.3s ease infinite; /* анимация 5 секунд */
+  width: 100; /* ширина полосы */
+  height: 10px; /* высота полосы */
+  margin: 0 auto; /* центрирование */
+  border-radius: 10px; /* круглые края */
+  background: linear-gradient(90deg, #ffcbe4, #f31981);
+  background-size: 200% 200%;
+  animation: gradientAnimation 2.3s ease infinite; /* анимация 5 секунд */
 }
 
-p{
-   line-height: 1.2;
+p {
+  line-height: 1.2;
 }

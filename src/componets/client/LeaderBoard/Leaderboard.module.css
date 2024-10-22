@@ -10,7 +10,8 @@
   margin: 20px 0;
   overflow-x: hidden;
   height: 400px; /* Фиксированная высота */
-  overflow: auto; /* Добавляем прокрутку */
+  overflow-y: auto; /* Включает вертикальную прокрутку */
+  overflow-x: hidden; /* Отключает горизонтальную прокрутку */
 }
 
 h2 {
@@ -20,6 +21,7 @@ h2 {
 }
 
 table {
+  border-radius: 25px;
   width: 100%;
   border-collapse: collapse;
 }
@@ -27,9 +29,11 @@ table {
 table,
 td {
   border: 2px solid black;
+  border-radius: 25px;
 }
 
 td {
+  border-radius: 25px;
   padding: 5px; /* Уменьшен padding для ячеек */
   font-size: 18px; /* Размер шрифта можно немного уменьшить для сохранения пропорций */
   height: 40px; /* Фиксированная высота для ячеек таблицы */
@@ -47,7 +51,7 @@ tr:hover {
   background-image: url("/public/question.png");
   background-size: cover;
   background-position: center;
-  min-height: 100vh; /* Используем min-height вместо height */
+  min-height: 110vh; /* Используем min-height вместо height */
   display: flex;
   justify-content: center;
   align-items: center;

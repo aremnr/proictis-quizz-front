@@ -10,7 +10,7 @@ body {
   background-image: url("/public/question.png");
   background-size: cover;
   background-position: center;
-  min-height: 100vh; /* Используем min-height вместо height */
+  min-height: 125vh; /* Минимальная высота 80% от высоты экрана */ /* Максимальная высота 125% от высоты экрана */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,6 +30,7 @@ body {
   font-weight: 400;
   font-size: 24px;
   font-family: "Yellowtail";
+  text-transform: none;
 }
 .answers {
   display: inline-flex;
@@ -37,11 +38,15 @@ body {
   margin: 0%;
   margin-top: 10px;
   padding-top: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 .answer {
   margin-bottom: 20px;
-  width: 332px;
-  height: 58px;
+  width: 332px; /* Фиксированная ширина */
+  height: auto; /* Высота будет подстраиваться под содержимое */
+  padding: 10px 20px; /* Добавляем отступы для удобства */
   border-radius: 15px;
   border: 2px solid;
   background-color: #d9d9d9;
@@ -49,6 +54,10 @@ body {
   color: black;
   text-align: center;
   transition: all 0.1s ease;
+  text-transform: none;
+  display: flex; /* Используем flexbox для центрирования текста */
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
 }
 
 .answer:hover {
@@ -78,7 +87,7 @@ body {
   margin-top: 10px;
 }
 .questPhoto {
-  margin-top: 10px;
+  padding-bottom: 15px;
 }
 
 .ava {
@@ -116,14 +125,15 @@ body {
 }
 
 .innerContainer {
-  padding: 20px;
+  padding: 25px;
   background-color: #ffffff;
   border-radius: 70px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  width: 83%;
+  height: auto;
+  width: 93%;
   text-align: center;
   margin: 20px 0;
+  box-sizing: border-box;
 }
 .innerContainer2 {
   padding: 20px;

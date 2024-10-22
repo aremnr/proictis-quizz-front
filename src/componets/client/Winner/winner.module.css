@@ -1,16 +1,15 @@
-.bgimage{
-  background-image: url('/public/question.png');
+.bgimage {
+  background-image: url("/public/question.png");
   background-size: cover;
-    background-position: center;
-    min-height: 100vh; /* Используем min-height вместо height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* Убираем отступы */
-    margin: 0; /* Убираем отступы для родительского контейнера */
-    overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
+  background-position: center;
+  min-height: 125vh; /* Используем min-height вместо height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы для родительского контейнера */
+  overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
 }
-
 
 .outerContainer {
   display: flex;
@@ -23,68 +22,63 @@
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
- }
+}
 
 .innerContainer {
-   padding: 20px;
-   background-color: #ffffff;
-   border-radius: 70px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-   max-width: 355px; 
-   width: 100%;
-   height: 92%;
-   text-align: center;
-   margin: 20px 0;
-  
- }
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 70px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 355px;
+  width: 100%;
+  height: 92%;
+  text-align: center;
+  margin: 20px 0;
+}
 
-.avatar{
+.avatar {
   padding-left: 63px;
   padding-right: 63px;
   width: 220px;
   height: 220px;
-  
-  
 }
 
-.avatar1{
+.avatar1 {
   padding-top: 15px;
   padding-left: 63px;
   padding-right: 63px;
   width: 90px;
   height: 60px;
-  
-  
 }
 
-p{
+p {
   margin-top: 18px;
   margin-bottom: 20px;
   font-size: 30px;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
 }
 
-.RankingContainer{
+.RankingContainer {
   padding-top: 35px;
 }
 
 @keyframes gradientAnimation {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 
-.results{
+.results {
   font-size: 25px;
-  color:#FFFFFF;
-  background: linear-gradient(60deg, #9213A7, #FD378A);
+  color: #ffffff;
+  background: linear-gradient(60deg, #9213a7, #fd378a);
   border-radius: 38px;
   width: 250px;
   height: 70px;
@@ -93,8 +87,6 @@ p{
   background-size: 200% 200%;
 }
 
-.buttonresults{
+.buttonresults {
   padding-top: 130px;
 }
-
-

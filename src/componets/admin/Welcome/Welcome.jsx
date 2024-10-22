@@ -20,8 +20,11 @@ export function Welcome() {
     navigate("/PreviousQuiz");
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleCreateReferralCode = () => {
     const accessToken = localStorage.getItem("access_token");
+    setLoading(true); // Установка состояния загрузки
     axios
       .post(
         "https://quiz.dev.schtil.com/create_referral",
@@ -34,11 +37,42 @@ export function Welcome() {
         }
       )
       .then(function (response) {
+        console.log("response.data.referral", response.data.referral);
         setReferralCode(response.data.referral);
         setOpenModal(true);
       })
       .catch(function (error) {
-        console.log(error);
+        if (error.response && error.response.status === 301) {
+          const newUrl = error.response.headers.location;
+          console.log("Redirecting to new URL:", newUrl);
+          // Perform the redirected request here
+          return axios.post(
+            newUrl,
+            {},
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+        } else {
+          console.log("Error: ", error);
+          throw error; // Rethrow error to handle it outside if necessary
+        }
+      })
+      .then(function (response) {
+        if (response) {
+          console.log("New response.data.referral", response.data.referral);
+          setReferralCode(response.data.referral);
+          setOpenModal(true);
+        }
+      })
+      .catch(function (error) {
+        console.log("Redirect error: ", error);
+      })
+      .finally(() => {
+        setLoading(false); // Снятие состояния загрузки после завершения запроса
       });
   };
 
@@ -90,8 +124,9 @@ export function Welcome() {
               color="secondary"
               onClick={handleCreateReferralCode}
               className={styles.button}
+              disabled={loading}
             >
-              Создать реферальный код
+              {loading ? "Создание..." : "Создать реферальный код"}
             </Button>
           </div>
           <p className={styles.subText}>

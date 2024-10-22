@@ -25,11 +25,7 @@ export function Answer() {
           <div className={styles.elements}>
             <p className={styles.question}>{currentQuestion.question}</p>
             <div className={styles.questPhoto}>
-              <img
-                className={styles.photo}
-                src="/thinkingface.png"
-                alt="Gubka"
-              />
+              <img className={styles.photo} src="/dogsmile.gif" alt="Gubka" />
               <p className={styles.Rightanswer}>Верный ответ:</p>
             </div>
 

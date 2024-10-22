@@ -111,8 +111,8 @@ export function QuestionView() {
               <div className={styles.questPhoto}>
                 <img
                   className={styles.photo}
-                  src="/thinkingface.png"
-                  alt="Gubka"
+                  src="/thinkingfacegif.gif"
+                  alt="thinkingface"
                 />
               </div>
               {timer !== 0 && (

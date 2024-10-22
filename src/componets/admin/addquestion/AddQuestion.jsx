@@ -7,7 +7,7 @@ export function AddQuestion() {
   const location = useLocation();
   const maxQuestions = location.state.maxQuestions;
   const [questions, setQuestions] = useState([
-    { text: "", answers: [""], points: 1, correctAnswerIndices: [] },
+    { text: "", answers: [""], points: 1, correctAnswerIndices: null },
   ]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [isLastQuestion, setIsLastQuestion] = useState(false);
@@ -83,7 +83,7 @@ export function AddQuestion() {
       hasError = true;
     }
 
-    if (currentQ.correctAnswerIndices.length === 0) {
+    if (currentQ.correctAnswerIndex === null) {
       hasError = true;
       alert("Пожалуйста, выберите хотя бы один правильный ответ");
     }
@@ -102,9 +102,7 @@ export function AddQuestion() {
           points: q.points,
           answers: q.answers.map((a, index) => ({
             text: a,
-            correct:
-              Array.isArray(q.correctAnswerIndices) &&
-              q.correctAnswerIndices.includes(index),
+            correct: q.correctAnswerIndex === index,
           })),
         })),
       };
@@ -162,19 +160,9 @@ export function AddQuestion() {
 
   const handleCorrectAnswerChange = (index) => {
     const newQuestions = [...questions];
-    const correctAnswers =
-      newQuestions[currentQuestion].correctAnswerIndices || [];
-
-    if (correctAnswers.includes(index)) {
-      newQuestions[currentQuestion].correctAnswerIndices =
-        correctAnswers.filter((i) => i !== index);
-    } else {
-      newQuestions[currentQuestion].correctAnswerIndices = [
-        ...correctAnswers,
-        index,
-      ];
-    }
+    newQuestions[currentQuestion].correctAnswerIndex = index;
     setQuestions(newQuestions);
+    console.log("Выбранный индекс правильного ответа:", index);
   };
 
   return (
@@ -226,9 +214,7 @@ export function AddQuestion() {
                     <input
                       type="checkbox"
                       checked={
-                        questions[
-                          currentQuestion
-                        ].correctAnswerIndices?.includes(index) || false
+                        questions[currentQuestion].correctAnswerIndex === index
                       }
                       onChange={() => handleCorrectAnswerChange(index)}
                       className={`${styles.checkmark} ${
