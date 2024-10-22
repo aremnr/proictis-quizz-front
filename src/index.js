@@ -98,7 +98,7 @@ const router = createBrowserRouter([
     element: <QuestionView />,
   },
   {
-    path: "/:quiz_id/qr",
+    path: "/quiz/:quiz_id/game/:game_id/qr",
     element: <Qr />,
   },
 

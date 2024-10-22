@@ -17,42 +17,22 @@ export function Qr() {
   const [answer, setAnswer] = useState(null);
   const [gameMessage, setGameMessage] = useState("Начать игру!");
   const [connectedUsers, setConnectedUsers] = useState([]);
-  const { quiz_id } = useParams();
-  const productionPrefix = "https://quiz.schtil.com";
-  const localPrefix = "http://localhost:3000";
+  const { quiz_id, game_id } = useParams();
   const accessToken = localStorage.getItem("access_token");
   const maxQuestions = location.state?.maxQuestions;
 
   useEffect(() => {
-    axios
-      .get(`https://quiz.dev.schtil.com/create_game`, {
-        params: {
-          quiz_id: quiz_id,
-        },
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        const gameId = response.data.game_id;
+    const urlToEncode = `${window.location.host}/quiz/${quiz_id}/game/${game_id}`;
+    console.log("decoded url: ", urlToEncode);
 
-        const urlToEncode = `${window.location.host}/quiz/${quiz_id}/game/${gameId}`;
-        console.log("decoded url: ", urlToEncode);
+    qr.toDataURL(urlToEncode, function (err, url) {
+      console.log("encoded url: ", url);
+      setQrcode(url);
+    });
 
-        qr.toDataURL(urlToEncode, function (err, url) {
-          console.log("encoded url: ", url);
-          setQrcode(url);
-        });
-
-        const ws = new WebSocket(`wss://quiz.dev.schtil.com/game/${gameId}`);
-        setWs(ws);
-      })
-      .catch((error) => {
-        console.error("Ошибка при получении вопроса:", error);
-      });
-  }, [quiz_id, accessToken]);
+    const ws = new WebSocket(`wss://quiz.dev.schtil.com/game/${game_id}`);
+    setWs(ws);
+  }, [quiz_id, game_id]);
 
   const handleBackClick = () => {
     // Передаем maxQuestions и quizId при навигации назад
