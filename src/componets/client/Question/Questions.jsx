@@ -50,7 +50,7 @@ export function Questions() {
               <div className={styles.questPhoto}>
                 <img
                   className={styles.photo}
-                  src="/thinkingfacegif.gif"
+                  src="/thinkingabout.gif"
                   alt="Gubka"
                 />
               </div>

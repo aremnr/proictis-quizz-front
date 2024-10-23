@@ -8,17 +8,24 @@ body {
 
 .bgimage {
   background-image: url("/public/question.png");
-  max-width: 100%;
-  height: auto;
-  height: 120vh;
+  background-size: cover;
+  background-position: center;
+  min-height: 125vh; /* Минимальная высота 80% от высоты экрана */ /* Максимальная высота 125% от высоты экрана */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы для родительского контейнера */
+  overflow: hidden; /* Скрывает все, что выходит за пределы контейнера */
 }
 
 .answers {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  margin: 0%;
-  margin-top: px;
-  padding-top: px;
+  align-items: center; /* Центрирование кнопок */
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .answerRight {
