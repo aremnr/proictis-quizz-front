@@ -15,13 +15,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw; /* 90% ширины родительского элемента */
-  height: 100vh; /* 90% высоты окна просмотра */
-  margin: 0 auto; /* Центрирование контейнера по горизонтали */
-  padding: 10px; /* Внутренние отступы */
+  height: 100vh;
   background-size: cover;
   background-position: center;
-  box-sizing: border-box;
 }
 
 .innerContainer {
@@ -31,9 +27,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 355px;
   width: 100%;
-  height: 92%;
   text-align: center;
   margin: 20px 0;
+  height: auto; /* Убираем фиксированную высоту, чтобы контейнер подстраивался под содержимое */
 }
 
 .avatar {
@@ -88,5 +84,5 @@ p {
 }
 
 .buttonresults {
-  padding-top: 130px;
+  padding-top: 30px; /* Уменьшаем отступ перед кнопкой, если она слишком далеко от контента */
 }
